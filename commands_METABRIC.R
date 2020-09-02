@@ -5,7 +5,15 @@ library(survival)
 library(BASALT)
 library(cowplot)
 #Load object containing interesting gene lists
-load(file = "C:/Users/Jeron/Dropbox/NatureComs_Rebuttal_DATA2020/SurvivalAnalysisJeron/200120_mygenelist.rdata")
+mygenelist <- list("INVOLUTION"=c("Lifr","Il1a","Il1b","Il1r2","Il11","Il13",
+"Cxcl1","Lsp1","Cd19","Cd83","Tnfsf7","Tnfsf9","A2m","Serpina1c","Fcer1c",
+"Pigr","Sema4b","Sema7a","C1qa","C3ar1","C9","Tnfsf4","Tnfsf6","Tnfsf7",
+"Tnfsf10","Tnfsf12","Tnfsf9","Il4i1","Gp5","Il11ra2","Ltbr","Cd80","Tnfrsf7",
+"Hpxn","Orm2","Cebpd","Axcam","E4bp4","Inhbb","Pafah1b2","Il12rb1","Ccl9",
+"Cd14","Lcn2","Cebpd","Necl1","C2","Tgfb1","Tgfb3","Tnfrsf6","Myd88","Emr1",
+"Ecgf1","Pla2g2a","Fadd","Osmr","Il1r1","Il10rb","Csf1r","Ccl6","Ccl7","Ccl8",
+"Ccl21a","Cxcl9","Cxcl14","Cd79a","Ly86","Cd86","Tnfrsf4","Lrp1","Hp","Saa1",
+"Saa2","Saa3","Saa-ps","Sema4a","Ltf","C3","C4","C2","C1qa","C1qc","Casp1"))
 
 # Create CGDS object
 mycgds = CGDS("http://www.cbioportal.org/")
