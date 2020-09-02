@@ -117,3 +117,9 @@ plotSurv<-function(genes, clindatName = "200120_METABRIC", Bins = "Bins: <33%; >
   plot(p_final)
   return(invisible(comDF))
 }
+
+#Create survival plots for all patients
+all_patients <- plotSurv(genes = mygenelist$INVOLUTION)
+#Create survival plots for all luminal patients
+clindat <- clindat[grepl(pattern = "Lum", clindat$CLAUDIN_SUBTYPE),]
+luminal_patients <- plotSurv(genes = mygenelist$INVOLUTION, clindatName = "METABRIC_Luminal")
