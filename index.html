@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<style>
+body{
+	display: flex;
+}
+.color-input{
+	margin: 6px;
+}
+
+svg{
+	margin-top: -90px;
+	margin-left: -40px;
+}
+
+#color-legend, #cell-lineage{
+	margin-top: 60px;
+	font: 400 18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#color-legend > p, #cell-lineage > p {
+	padding-bottom: 10px;
+	padding-left: 5px;
+}
+
+#cell-lineage > div {
+	font-weight: 400;
+    margin-left: 10px;
+}
+
+.node {
+  font: 400 30px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  /* fill: rgb(11, 11, 11); */
+  zoom: 20%;
+}
+
+.node:hover {
+  fill: #000;
+}
+
+.not_node {
+  fill: rgba(194, 193, 193, 0.427);
+}
+
+.link {
+  stroke: hsla(0,0%,90%,0.2);
+  fill: none;
+  pointer-events: none;
+}
+
+.node:hover,
+.node--source{
+  font-weight:700;
+  /* fill: #d62728; */
+}
+
+.node--target {
+  font-weight: 400;
+}
+
+.node--source {
+  fill: #2ca02c;
+}
+
+/* .node--target {
+  fill: #d62728;
+} */
+
+.link--source,
+.link--target {
+  stroke-width: 1.5px;
+}
+
+.link--source {
+  stroke: #d62728;
+}
+
+.link--target {
+  stroke: #d62728;
+}
+
+#interaction{
+	width: 48px;
+    background-color: #f2f2f2;
+    height: 20px;
+}
+</style>
+<body>
+	<script>
+		function updateColor(){
+			link.style("stroke", function(d){
+
+				document.querySelector('#tier1').defaultValue = d3.select('#tier1')._groups[0][0].value
+				document.querySelector('#tier2').defaultValue = d3.select('#tier2')._groups[0][0].value
+				document.querySelector('#tier3').defaultValue = d3.select('#tier3')._groups[0][0].value
+				document.querySelector('#tier4').defaultValue = d3.select('#tier4')._groups[0][0].value
+				document.querySelector('#interaction').defaultValue = d3.select('#interaction')._groups[0][0].value
+				var b;
+				d[0].data.imports.forEach(function(a){
+					if(d.target.data.name == a.link){
+						b = a.value
+					}
+				})
+				// return("hsl(355,"+ eqn(35,100, 1, 55, b)+"%,"+  eqn(90, 6, 1, 55, b) + "%)")
+				if(b >= 67){
+					return d3.select('#tier1')._groups[0][0].defaultValue
+				}
+				else if (b <67 && b>= 50){
+					return d3.select('#tier2')._groups[0][0].defaultValue
+				}
+				else if (b <50 && b>=15){
+					return d3.select('#tier3')._groups[0][0].defaultValue
+				}
+				else if (b <15 && b>=11){
+					return d3.select('#tier4')._groups[0][0].defaultValue
+				}
+				else{
+					return 'hsla(0,0%,90%,0.2)'
+				}
+  
+  });
+}
+	</script>
+	<div id='color-legend'>
+		<p><b>Interaction</b></p>
+		<div class='color-input'>
+			<input type="color" id="tier1" name="tier1"
+				value="#08ADFF" onchange="updateColor()">
+			<label for="tier1">1st Tier</label>
+		</div>
+
+		<div class='color-input'>
+			<input type="color" id="tier2" name="tier2"
+					value="#B2E7D7" onchange="updateColor()">
+			<label for="tier2">2nd Tier</label>
+		</div>
+		<div class='color-input'>
+			<input type="color" id="tier3" name="tier3"
+				value="#C6AC01" onchange="updateColor()">
+			<label for="tier3">3rd Tier</label>
+		</div>
+
+		<div class='color-input'>
+			<input type="color" id="tier4" name="tier4"
+					value="#F2DA97" onchange="updateColor()">
+			<label for="tier4">4th Tier</label>
+		</div>
+		<div class='color-input' style="display: flex;">
+			<!-- <input type="color" id="interaction" name="interaction"
+					value="#e3e3e3" onchange="updateColor()"> -->
+			<div id='interaction'></div>
+			<label for="interaction" style="margin-left: 5px;">5th Tier</label>
+		</div>
+	<div id='cell-lineage'>
+		<p><b>Cell lineage</b></p>
+		<div style="color: green;">Immune</div>
+		<div style="color: blue;">Stroma</div>
+		<div style="color: red;">Epithelium</div>
+	</div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+var diameter = 900,
+    radius = diameter / 2,
+    innerRadius = radius - 120;
+
+var cluster = d3.cluster()
+    .size([360, innerRadius]);
+
+var line = d3.radialLine()
+    .curve(d3.curveBundle.beta(0.85))
+    .radius(function(d) { return d.y; })
+    .angle(function(d) { return d.x / 180 * Math.PI; });
+
+var svg = d3.select("body").insert("svg","div")
+    .attr("width", diameter+250)
+    .attr("height", diameter+500)
+  .append("g")
+    .attr("transform", "translate(" + (radius+100) + "," + (radius+100) + ")");
+
+var link = svg.append("g").selectAll(".link"),
+    node = svg.append("g").selectAll(".node");
+
+
+// d3.json("data2.json", function(error, classes) {
+//   if (error) throw error;
+//   console.log(classes[1].name);
+
+var classes = [
+	{
+		"name": "epi.epi7.Epi_Basal",
+		"imports": [{
+			"link": "fib.fib.ECM_CAF2",
+			"value": 5
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 3
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 6
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 5
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 1
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 1
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 4
+		}]
+	},
+	{
+		"name": "epi.epi.Epi_Alv-D",
+		"imports": [{
+			"link": "epi.epi7.Epi_Basal",
+			"value": 4
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 42
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 6
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 65
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 25
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 53
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 64
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 38
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 17
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 12
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 10
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 5
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 7
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 4
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 34
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 33
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 20
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 21
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 26
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 23
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 21
+		}]
+	},
+	{
+		"name": "epi.epi.Epi_Alv-P",
+		"imports": [{
+			"link": "epi.epi4.Normal",
+			"value": 14
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 27
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 29
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 28
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 24
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 33
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 36
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 5
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 67
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 22
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 51
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 66
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 40
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 15
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 14
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 9
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 6
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 8
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 4
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 30
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 4
+		}]
+	},
+	{
+		"name": "epi.epi.Epi_LP Alv",
+		"imports": [{
+			"link": "epi.epi.Epi_LP",
+			"value": 18
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 14
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 12
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 21
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 19
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 3
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 37
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 9
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 25
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 37
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 25
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 8
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 9
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 5
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 4
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 5
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 3
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 19
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 27
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 13
+		}]
+	},
+	{
+		"name": "epi.epi.Epi_LP",
+		"imports": [{
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 18
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 18
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 26
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 18
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 5
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 44
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 13
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 33
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 42
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 32
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 15
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 12
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 7
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 4
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 6
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 2
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 24
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 4
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 29
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 21
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 18
+		}]
+	},
+	{
+		"name": "epi.epi.Epi_Cycling",
+		"imports": [{
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 21
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 17
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 2
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 38
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 6
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 25
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 38
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 24
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 6
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 7
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 5
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 2
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 6
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 1
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 18
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 24
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 13
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 12
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 18
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 13
+		}]
+	},
+	{
+		"name": "epi.epi.Epi_Myo",
+		"imports": [{
+			"link": "epi.epi4.Epi_Hs",
+			"value": 4
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 76
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 20
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 52
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 72
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 40
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 12
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 11
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 8
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 5
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 6
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 2
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 33
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 36
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 21
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 19
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 18
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 26
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 17
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 42
+		}]
+	},
+	{
+		"name": "epi.epi4.Epi_Hs",
+		"imports": [{
+			"link": "fib.fib.ECM_CAF2",
+			"value": 10
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 8
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 15
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 9
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 2
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 2
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 5
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 1
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 6
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 4
+		}]
+	},
+	{
+		"name": "epi.epi4.Epi_LP Hs",
+		"imports": [{
+			"link": "epi.epi.Epi_Cycling",
+			"value": 13
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 23
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 26
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 1
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 58
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 15
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 40
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 56
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 33
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 7
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 7
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 3
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 2
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 5
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 23
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 28
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 14
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 14
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 18
+		}]
+	},
+	{
+		"name": "epi.epi4.Normal",
+		"imports": [{
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 13
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 21
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 14
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 13
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 20
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 21
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 32
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 3
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 24
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 32
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 20
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 3
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 3
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 1
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 4
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 14
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 1
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 14
+		}]
+	},
+	{
+		"name": "epi.epi4.Epi_Multi",
+		"imports": [{
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 4
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 1
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 4
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 3
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 10
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 5
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 11
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 9
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 2
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 1
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 5
+		}]
+	},
+	{
+		"name": "fib.fib.ECM_CAF2",
+		"imports": [{
+			"link": "fib.fib2.Myofibroblast",
+			"value": 38
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 97
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 119
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 72
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 40
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 16
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 9
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 5
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 8
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 2
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 37
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 10
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 67
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 32
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 37
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 44
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 58
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 38
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 65
+		}, {
+			"link": "epi.epi7.Epi_Basal",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 76
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 10
+		}]
+	},
+	{
+		"name": "fib.fib.Inv_iCAF",
+		"imports": [{
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 93
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 59
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 17
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 12
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 11
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 5
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 9
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 3
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 32
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 51
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 24
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 25
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 33
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 40
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 25
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 53
+		}, {
+			"link": "epi.epi7.Epi_Basal",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 52
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 8
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 97
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 45
+		}]
+	},
+	{
+		"name": "fib.fib.Inv_ECM_CAF",
+		"imports": [{
+			"link": "fib.fib.iCAF",
+			"value": 82
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 43
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 13
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 10
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 6
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 7
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 3
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 39
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 11
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 66
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 32
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 37
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 42
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 56
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 38
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 64
+		}, {
+			"link": "epi.epi7.Epi_Basal",
+			"value": 6
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 72
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 15
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 119
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 62
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 93
+		}]
+	},
+	{
+		"name": "fib.fib.iCAF",
+		"imports": [{
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 18
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 9
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 10
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 6
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 8
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 2
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 24
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 9
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 40
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 20
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 25
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 32
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 33
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 24
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 38
+		}, {
+			"link": "epi.epi7.Epi_Basal",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 40
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 9
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 72
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 40
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 59
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 82
+		}]
+	},
+	{
+		"name": "fib.fib2.Myofibroblast",
+		"imports": [{
+			"link": "fib.fib.Inv_iCAF",
+			"value": 45
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 62
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 40
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 28
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 16
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 9
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 2
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 8
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 3
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 27
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 22
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 9
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 13
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 15
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 6
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 25
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 20
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 38
+		}]
+	},
+	{
+		"name": "fib.fib2.ECM_CAF1",
+		"imports": [{
+			"link": "orig.orig.Myeloid",
+			"value": 6
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 1
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 2
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 21
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 15
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 8
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 15
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 7
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 6
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 17
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 12
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 40
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 28
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 17
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 43
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 18
+		}]
+	},
+	
+	{
+		"name": "orig.orig1.T cells 2",
+		"imports": [{
+			"link": "orig.orig.B cells",
+			"value": 4
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 12
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 9
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 7
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 10
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 8
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 9
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 9
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 11
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 10
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 10
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 1
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 11
+		}]
+	},
+	{
+		"name": "orig.orig2.NK cells",
+		"imports": [{
+			"link": "orig.orig.B cells",
+			"value": 3
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 1
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 4
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 6
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 1
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 4
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 4
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 5
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 5
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 2
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 5
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 6
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 6
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 5
+		}]
+	},
+	{
+		"name": "orig.orig2.T Cells 1",
+		"imports": [{
+			"link": "orig.orig.Endothelium",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 4
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 1
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 4
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 2
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 2
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 3
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 3
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 3
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 2
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 4
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 1
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 1
+		}]
+	},
+	{
+		"name": "orig.orig.Myeloid",
+		"imports": [{
+			"link": "orig.orig1.T cells 2",
+			"value": 11
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 5
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 11
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 4
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 16
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 14
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 3
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 9
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 12
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 7
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 7
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 12
+		}, {
+			"link": "epi.epi7.Epi_Basal",
+			"value": 1
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 11
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 2
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 16
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 16
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 12
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 13
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 9
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 6
+		}]
+	},
+	{
+		"name": "orig.orig.B cells",
+		"imports": [{
+			"link": "orig.orig2.T Cells 1",
+			"value": 1
+		}, {
+			"link": "orig.orig.Endothelium",
+			"value": 7
+		}, {
+			"link": "epi.epi4.Epi_Multi",
+			"value": 1
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 8
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 4
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 6
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 6
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 7
+		}, {
+			"link": "epi.epi7.Epi_Basal",
+			"value": 1
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 6
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 2
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 8
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 8
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 9
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 7
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 8
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 2
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 11
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 4
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 3
+		}]
+	},
+	
+	{
+		"name": "orig.orig.Endothelium",
+		"imports": [{
+			"link": "epi.epi4.Epi_Multi",
+			"value": 5
+		}, {
+			"link": "epi.epi.Epi_Alv-P",
+			"value": 30
+		}, {
+			"link": "epi.epi4.Normal",
+			"value": 14
+		}, {
+			"link": "epi.epi.Epi_LP Alv",
+			"value": 19
+		}, {
+			"link": "epi.epi.Epi_LP",
+			"value": 24
+		}, {
+			"link": "epi.epi4.Epi_LP Hs",
+			"value": 23
+		}, {
+			"link": "epi.epi.Epi_Cycling",
+			"value": 18
+		}, {
+			"link": "epi.epi.Epi_Alv-D",
+			"value": 34
+		}, {
+			"link": "epi.epi7.Epi_Basal",
+			"value": 2
+		}, {
+			"link": "epi.epi.Epi_Myo",
+			"value": 33
+		}, {
+			"link": "epi.epi4.Epi_Hs",
+			"value": 5
+		}, {
+			"link": "fib.fib.ECM_CAF2",
+			"value": 37
+		}, {
+			"link": "fib.fib2.Myofibroblast",
+			"value": 27
+		}, {
+			"link": "fib.fib.Inv_iCAF",
+			"value": 32
+		}, {
+			"link": "fib.fib.Inv_ECM_CAF",
+			"value": 39
+		}, {
+			"link": "fib.fib.iCAF",
+			"value": 24
+		}, {
+			"link": "fib.fib2.ECM_CAF1",
+			"value": 21
+		}, {
+			"link": "orig.orig.Myeloid",
+			"value": 16
+		}, {
+			"link": "orig.orig1.T cells 2",
+			"value": 12
+		}, {
+			"link": "orig.orig2.NK cells",
+			"value": 4
+		}, {
+			"link": "orig.orig.B cells",
+			"value": 7
+		}, {
+			"link": "orig.orig2.T Cells 1",
+			"value": 2
+		}]
+	}
+	]
+
+
+  var root = packageHierarchy(classes)
+      .sum(function(d) { 
+        //console.log(d);
+        return d.size; });
+
+  //console.log(cluster(root));
+
+  cluster(root);
+var i = 0;
+
+  link = link
+    .data(packageImports(root.leaves()))
+    .enter().append("path")
+      .each(function(d) { 
+        d.source = d[0]
+		d.target = d[d.length - 1]
+		// d.target.value = d[0].data.imports[i].value; 
+		// i = i + 1;
+        //  console.log(1);
+      })
+      .attr("class", "link")
+      .attr("d", line)
+      .style("stroke", function(d){
+        //return ("hsl(0, 100%,"+  eqn(90, 6, 1, 55, d.target.value) + "%)")
+		var b;
+		d[0].data.imports.forEach(function(a){
+			if(d.target.data.name == a.link){
+				b = a.value
+			}
+		})
+        // return("hsl(355,"+ eqn(35,100, 1, 55, b)+"%,"+  eqn(90, 6, 1, 55, b) + "%)")
+		if(b >= 67){
+			return d3.select('#tier1')._groups[0][0].defaultValue
+		}
+		else if (b <67 && b>= 50){
+			return d3.select('#tier2')._groups[0][0].defaultValue
+		}
+		else if (b <50 && b>=15){
+			return d3.select('#tier3')._groups[0][0].defaultValue
+		}
+		else if (b <15 && b>=11){
+			return d3.select('#tier4')._groups[0][0].defaultValue
+		}
+		else{
+			return 'hsla(0,0%,90%,0.2)'
+		}
+  
+  });
+
+      
+  node = node
+    .data(root.leaves())
+    .enter().append("text")
+      .attr("class", "node")
+	  .attr("dy", "0.31em")
+	  .style('fill', '#929292')
+	//   function(d){
+	// 	if(d.data.name.split('.')[0] == 'epi'){
+	// 		return 'red';
+	// 	}
+	// 	else if(d.data.name.split('.')[0] == 'fib' || d.data.name.split('.')[2] == "Endothelium"){
+	// 		return 'blue';
+	// 	}
+	// 	else{
+	// 		return 'green';
+	// 	}
+	//   })
+      .attr("transform", function(d) { 
+        //console.log(d);
+        return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)"); })
+      .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+      .text(function(d) { return d.data.key; })
+      .on("mouseover", mouseovered)
+      .on("mouseout", mouseouted);
+// });
+
+// document.querySelector('#tier1').addEventListener('change',function(){return(document.querySelector('#tier1').value)})
+// document.querySelector('#tier2').addEventListener('change',function(){return(document.querySelector('#tier1').value)})
+// document.querySelector('#tier3').addEventListener('change',function(){return(document.querySelector('#tier1').value)})
+// document.querySelector('#tier4').addEventListener('change',function(){return(document.querySelector('#tier1').value)})
+
+function mouseovered(d) {
+  node
+      .each(function(n) { n.target = n.source = false; })
+
+  link
+      .style('stroke', function (link_d) { 
+			var b;
+			if(link_d.source === d || link_d.target === d ){
+				d.data.imports.forEach(function(a){
+					if(link_d.source.data.name == a.link || link_d.target.data.name == a.link){
+						b = a.value
+					}
+					return
+				})
+				if(b >= 67){
+					return d3.select('#tier1')._groups[0][0].defaultValue
+				}
+				else if (b <67 && b>= 50){
+					return d3.select('#tier2')._groups[0][0].defaultValue
+				}
+				else if (b <50 && b>=15){
+					return d3.select('#tier3')._groups[0][0].defaultValue
+				}
+				else if (b < 15 && b >= 11){
+					return d3.select('#tier4')._groups[0][0].defaultValue
+				}
+				else{
+					return 'hsla(0,0%,90%,0.2)'
+				}
+			}
+		//   return link_d.source === d || link_d.target === d ? "hsl(355,"+ eqn(35, 100, 1, 55, b)+"%,"+  eqn(90, 6, 1, 55, b) + "%)" : "hsl(0, 0%, 99%)";
+		  })
+      //.style('stroke', function (link_d) { return link_d.source === d || link_d.target === d ? "hsl(0,100%,"+  eqn(90, 6, 1, 55, link_d.target.value) + "%)" : "hsl(0, 0%, 94%)";})
+      //.style('stroke', function (link_d) { return link_d.source === d || link_d.target === d ? "hsl("+ (link_d.target.value*2) + ",100%,50%)" : "rgb(224, 224, 224)";})
+      .classed("link--target", function(l) { if (l.target === d) return l.source.source = true; })
+      .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; })
+      .filter(function(l) { return l.target === d || l.source === d; })
+       .raise();
+
+  node
+      .classed("not_node", function(n){return !n.source & !n.target})
+      .classed("node--target", function(n) { return n.target; })
+	  .classed("node--source", function(n) { return n.source; })
+	  .style('fill', '#929292')
+	//   .style('fill', function(d){
+	// 	if(d.data.name.split('.')[0] == 'epi'){
+	// 		return 'red';
+	// 	}
+	// 	else if(d.data.name.split('.')[0] == 'fib' | d.data.name.split('.')[2] == "Endothelium"){
+	// 		return 'blue';
+	// 	}
+	// 	else{
+	// 		return 'green';
+	// 	}
+	//   })
+	  
+}
+
+function eqn(y_x_min, y_x_max, x_min, x_max, d_value){
+  var m = ((y_x_max - y_x_min)/(x_max- x_min));
+  var c= y_x_min-(x_min*m);
+  return ((m*d_value)+c);
+}
+
+function mouseouted(d) {
+  link
+  .style("stroke", function(d){
+	var b;
+	d[0].data.imports.forEach(function(a){
+		if(d.target.data.name == a.link){
+			b = a.value
+		}
+	})
+	if(b >= 67){
+			return d3.select('#tier1')._groups[0][0].defaultValue
+		}
+		else if (b <67 && b>= 50){
+			return d3.select('#tier2')._groups[0][0].defaultValue
+		}
+		else if (b <50 && b>=15){
+			return d3.select('#tier3')._groups[0][0].defaultValue
+		}
+		else if (b <15 && b>=11){
+			return d3.select('#tier4')._groups[0][0].defaultValue
+		}
+		else{
+			return 'hsla(0,0%,90%,0.2)'
+		}
+        // return ("hsl(0,"+ eqn(35, 100, 1, 55, d.target.value)+"%,"+  eqn(90, 6, 1, 55, d.target.value) + "%)")
+        //return ("hsl(0, 100%,"+  eqn(90, 6, 1, 55, d.target.value) + "%)")
+        //95,60
+  })
+      // .classed("link--target", false)
+      // .classed("link--source", false);
+
+  node
+    .classed("not_node", false)
+      .classed("node--target", false)
+      .classed("node--source", false);
+}
+
+// Lazily construct the package hierarchy from class names.
+function packageHierarchy(classes) {
+  var map = {};
+
+  function find(name, data) {
+    var node = map[name], i;
+    if (!node) {
+      node = map[name] = data || {name: name, children: []};
+      if (name.length) {
+        node.parent = find(name.substring(0, i = name.lastIndexOf(".")));
+        node.parent.children.push(node);
+        node.key = name.substring(i + 1);
+      }
+    }
+    return node;
+  }
+
+  classes.forEach(function(d) {
+    find(d.name, d);
+  });
+
+  return d3.hierarchy(map[""]);
+}
+
+// Return a list of imports for the given array of nodes.
+// function packageImports(nodes) {
+//   var map = {},
+//       imports = [];
+
+//   // Compute a map from name to node.
+//   nodes.forEach(function(d) {
+//     map[d.data.name] = d;
+//   });
+
+//   // For each import, construct a link from the source to target node.
+//   nodes.forEach(function(d) {
+//     if (d.data.imports) d.data.imports.forEach(function(i) {
+//       imports.push(map[d.data.name].path(map[i]));
+//     });
+//   });
+
+//   return imports;
+// }
+
+function packageImports(nodes) {
+  var map = {},
+      imports = [];
+
+  // Compute a map from name to node.
+  nodes.forEach(function(d) {
+    map[d.data.name] = d;
+  });
+
+  // For each import, construct a link from the source to target node.
+  nodes.forEach(function(d) {
+    if (d.data.imports) d.data.imports.forEach(function(i) {
+      var target = map[i.link]; // find the target
+      target.value = i.value; // retain the value
+      imports.push(map[d.data.name].path(target));
+      //imports.push({source: map[d.data.name], target: target});
+    });
+  });
+  return imports;
+}
+
+var vis = d3.select("svg").append("g")
+var pi = Math.PI;
+var arcinnerRadius = 452;
+var arcouterRadius = 456;
+var leftarc = 544;
+var rightarc = 558;
+
+var arc1 = d3.arc()
+    .innerRadius(arcinnerRadius)
+    .outerRadius(arcouterRadius)
+    .startAngle(10 * (pi/180)) //converting from degs to radians
+    .endAngle(2.7) //just radians
+    
+vis.attr("width", "400").attr("height", "400") // Added height and width so arc is visible
+    .append("path")
+    .attr("d", arc1)
+    .attr("fill", "red")
+    .attr("transform", "translate("+leftarc+","+ rightarc +")");
+
+var arc2 = d3.arc()
+    .innerRadius(arcinnerRadius)
+    .outerRadius(arcouterRadius)
+    .startAngle(-112 * (pi/180)) //converting from degs to radians
+    .endAngle(-3.3) //just radians
+    
+vis.attr("width", "400").attr("height", "400") // Added height and width so arc is visible
+    .append("path")
+    .attr("d", arc2)
+    .attr("fill", "blue")
+    .attr("transform", "translate("+leftarc+","+ rightarc +")");
+
+var arc3 = d3.arc()
+    .innerRadius(arcinnerRadius)
+    .outerRadius(arcouterRadius)
+    .startAngle(-21 * (pi/180)) //converting from degs to radians
+    .endAngle(-1.7) //just radians
+    
+vis.attr("width", "400").attr("height", "400") // Added height and width so arc is visible
+    .append("path")
+    .attr("d", arc3)
+    .attr("fill", "green")
+    .attr("transform", "translate("+leftarc+","+ rightarc +")");
+
+var arc4 = d3.arc()
+    .innerRadius(arcinnerRadius)
+    .outerRadius(arcouterRadius)
+    .startAngle(-14 * (pi/180)) //converting from degs to radians
+    .endAngle(-0.11) //just radians
+    
+vis.attr("width", "400").attr("height", "400") // Added height and width so arc is visible
+    .append("path")
+    .attr("d", arc4)
+    .attr("fill", "blue")
+    .attr("transform", "translate("+leftarc+","+ rightarc +")");
+
+// var alpha = {begin: 1, end: 2.5};// radians
+// var group = svg.append('g')
+//                .attr("transform","translate(550,100)");
+
+// var beta = ((alpha.end - alpha.begin) / 2 + alpha.begin -  Math.PI / 2) * 180 / Math.PI;// degrees
+// group.append('text').text('Epithelium')
+// .attr("transform", "rotate(" + beta + ")");
+
+</script>
+</div>
+</body>
+</html>
