@@ -1,0 +1,1417 @@
+Provided cluster nodes: 300
+Job counts:
+	count	jobs
+	4	AlignSTAR
+	12	DGE
+	12	DGE_BeadSynthesisErrorsCorrected
+	4	DetectBeadSynthesisErrors
+	4	EstimateCellNumbers
+	4	EstimateCellNumbers_BeadSynthesisErrorsCorrected
+	16	FastqToBam
+	4	FilterBAM
+	4	MergeAndTagAlignedBam
+	4	MergeBam
+	4	PolyATrimmer
+	4	SamToFastq
+	4	SortSamAligned
+	4	TagCellBarcodes
+	4	TagMolecularBarcodes
+	4	TagReadWithGeneExon
+	4	TrimStartingSequence
+	1	all
+	11	build_bwt2
+	1	collate_fastqc_separate_lanes
+	32	fastqc_separate_lanes
+	32	fastqscreen_raw
+	32	rename_fastq
+	205
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-BD_QCexp_fresh/PYMT-BD_S2_L003_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.fresh_L003_R2.fastq.gz
+	wildcards: fastq=PYMT.BD.fresh_L003_R2
+Submitted DRMAA job (jobid 690804)
+rule build_bwt2:
+	input: data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.fa
+	output: data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.4.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.2.bt2
+	wildcards: genome=Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome
+Submitted DRMAA job (jobid 690805)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/BD_24h-55925873/BD-24h_S4_L004_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.24hr_L004_R2.fastq.gz
+	wildcards: fastq=PYMT.BD.24hr_L004_R2
+Submitted DRMAA job (jobid 690806)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/BD_24h-55925873/BD-24h_S4_L001_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.24hr_L001_R1.fastq.gz
+	wildcards: fastq=PYMT.BD.24hr_L001_R1
+Submitted DRMAA job (jobid 690807)
+rule build_bwt2:
+	input: data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.fa
+	output: data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.4.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.2.bt2
+	wildcards: genome=Homo_sapiens.GRCh38.dna.primary_assembly
+Submitted DRMAA job (jobid 690808)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-AC_QCexp_fresh/PYMT-AC_S1_L002_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.fresh_L002_R2.fastq.gz
+	wildcards: fastq=PYMT.AC.fresh_L002_R2
+Submitted DRMAA job (jobid 690809)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/AC_24h-55924893/AC-24h_S5_L003_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.24hr_L003_R2.fastq.gz
+	wildcards: fastq=PYMT.AC.24hr_L003_R2
+Submitted DRMAA job (jobid 690810)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/BD_24h-55925873/BD-24h_S4_L001_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.24hr_L001_R2.fastq.gz
+	wildcards: fastq=PYMT.BD.24hr_L001_R2
+Submitted DRMAA job (jobid 690811)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/AC_24h-55924893/AC-24h_S5_L004_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.24hr_L004_R2.fastq.gz
+	wildcards: fastq=PYMT.AC.24hr_L004_R2
+Submitted DRMAA job (jobid 690812)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-BD_QCexp_fresh/PYMT-BD_S2_L001_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.fresh_L001_R2.fastq.gz
+	wildcards: fastq=PYMT.BD.fresh_L001_R2
+Submitted DRMAA job (jobid 690813)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/BD_24h-55925873/BD-24h_S4_L003_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.24hr_L003_R2.fastq.gz
+	wildcards: fastq=PYMT.BD.24hr_L003_R2
+Submitted DRMAA job (jobid 690814)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-AC_QCexp_fresh/PYMT-AC_S1_L003_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.fresh_L003_R2.fastq.gz
+	wildcards: fastq=PYMT.AC.fresh_L003_R2
+Submitted DRMAA job (jobid 690815)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-BD_QCexp_fresh/PYMT-BD_S2_L004_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.fresh_L004_R2.fastq.gz
+	wildcards: fastq=PYMT.BD.fresh_L004_R2
+Submitted DRMAA job (jobid 690816)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/BD_24h-55925873/BD-24h_S4_L004_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.24hr_L004_R1.fastq.gz
+	wildcards: fastq=PYMT.BD.24hr_L004_R1
+Submitted DRMAA job (jobid 690817)
+rule build_bwt2:
+	input: data/genomes/Mt_rRNA_mouse.fa
+	output: data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/Mt_rRNA_mouse.4.bt2, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/Mt_rRNA_mouse.rev.2.bt2
+	wildcards: genome=Mt_rRNA_mouse
+Submitted DRMAA job (jobid 690818)
+rule build_bwt2:
+	input: data/genomes/Mycoplasma.fa
+	output: data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mycoplasma.4.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mycoplasma.rev.2.bt2
+	wildcards: genome=Mycoplasma
+Submitted DRMAA job (jobid 690819)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-AC_QCexp_fresh/PYMT-AC_S1_L001_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.fresh_L001_R2.fastq.gz
+	wildcards: fastq=PYMT.AC.fresh_L001_R2
+Submitted DRMAA job (jobid 690820)
+rule build_bwt2:
+	input: data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.fa
+	output: data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.4.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.2.bt2
+	wildcards: genome=Saccharomyces_cerevisiae.R64-1-1.dna.toplevel
+Submitted DRMAA job (jobid 690821)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/AC_24h-55924893/AC-24h_S5_L001_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.24hr_L001_R2.fastq.gz
+	wildcards: fastq=PYMT.AC.24hr_L001_R2
+Submitted DRMAA job (jobid 690822)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/BD_24h-55925873/BD-24h_S4_L003_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.24hr_L003_R1.fastq.gz
+	wildcards: fastq=PYMT.BD.24hr_L003_R1
+Submitted DRMAA job (jobid 690823)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-BD_QCexp_fresh/PYMT-BD_S2_L002_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.fresh_L002_R1.fastq.gz
+	wildcards: fastq=PYMT.BD.fresh_L002_R1
+Submitted DRMAA job (jobid 690824)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-BD_QCexp_fresh/PYMT-BD_S2_L004_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.fresh_L004_R1.fastq.gz
+	wildcards: fastq=PYMT.BD.fresh_L004_R1
+Submitted DRMAA job (jobid 690825)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/BD_24h-55925873/BD-24h_S4_L002_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.24hr_L002_R2.fastq.gz
+	wildcards: fastq=PYMT.BD.24hr_L002_R2
+Submitted DRMAA job (jobid 690826)
+rule build_bwt2:
+	input: data/genomes/rRNA_human.fa
+	output: data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/rRNA_human.4.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/rRNA_human.rev.2.bt2
+	wildcards: genome=rRNA_human
+Submitted DRMAA job (jobid 690827)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-AC_QCexp_fresh/PYMT-AC_S1_L004_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.fresh_L004_R2.fastq.gz
+	wildcards: fastq=PYMT.AC.fresh_L004_R2
+Submitted DRMAA job (jobid 690828)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-BD_QCexp_fresh/PYMT-BD_S2_L002_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.fresh_L002_R2.fastq.gz
+	wildcards: fastq=PYMT.BD.fresh_L002_R2
+Submitted DRMAA job (jobid 690829)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-BD_QCexp_fresh/PYMT-BD_S2_L003_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.fresh_L003_R1.fastq.gz
+	wildcards: fastq=PYMT.BD.fresh_L003_R1
+Submitted DRMAA job (jobid 690830)
+rule build_bwt2:
+	input: data/genomes/PhiX.fa
+	output: data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/PhiX.4.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/PhiX.rev.2.bt2
+	wildcards: genome=PhiX
+Submitted DRMAA job (jobid 690831)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-AC_QCexp_fresh/PYMT-AC_S1_L001_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.fresh_L001_R1.fastq.gz
+	wildcards: fastq=PYMT.AC.fresh_L001_R1
+Submitted DRMAA job (jobid 690832)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/AC_24h-55924893/AC-24h_S5_L002_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.24hr_L002_R1.fastq.gz
+	wildcards: fastq=PYMT.AC.24hr_L002_R1
+Submitted DRMAA job (jobid 690833)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/AC_24h-55924893/AC-24h_S5_L001_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.24hr_L001_R1.fastq.gz
+	wildcards: fastq=PYMT.AC.24hr_L001_R1
+Submitted DRMAA job (jobid 690834)
+rule build_bwt2:
+	input: data/genomes/rRNA_mouse.fa
+	output: data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/rRNA_mouse.4.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/rRNA_mouse.rev.2.bt2
+	wildcards: genome=rRNA_mouse
+Submitted DRMAA job (jobid 690835)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/AC_24h-55924893/AC-24h_S5_L002_R2_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.24hr_L002_R2.fastq.gz
+	wildcards: fastq=PYMT.AC.24hr_L002_R2
+Submitted DRMAA job (jobid 690836)
+rule build_bwt2:
+	input: data/genomes/Mt_rRNA_human.fa
+	output: data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/Mt_rRNA_human.4.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.2.bt2
+	wildcards: genome=Mt_rRNA_human
+Submitted DRMAA job (jobid 690837)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/BD_24h-55925873/BD-24h_S4_L002_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.24hr_L002_R1.fastq.gz
+	wildcards: fastq=PYMT.BD.24hr_L002_R1
+Submitted DRMAA job (jobid 690838)
+rule build_bwt2:
+	input: data/genomes/ERCC92.fa
+	output: data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/ERCC92.4.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/ERCC92.rev.2.bt2
+	wildcards: genome=ERCC92
+Submitted DRMAA job (jobid 690839)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/AC_24h-55924893/AC-24h_S5_L003_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.24hr_L003_R1.fastq.gz
+	wildcards: fastq=PYMT.AC.24hr_L003_R1
+Submitted DRMAA job (jobid 690840)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-AC_QCexp_fresh/PYMT-AC_S1_L003_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.fresh_L003_R1.fastq.gz
+	wildcards: fastq=PYMT.AC.fresh_L003_R1
+Submitted DRMAA job (jobid 690841)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-BD_QCexp_fresh/PYMT-BD_S2_L001_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.BD.fresh_L001_R1.fastq.gz
+	wildcards: fastq=PYMT.BD.fresh_L001_R1
+Submitted DRMAA job (jobid 690842)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-AC_QCexp_fresh/PYMT-AC_S1_L002_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.fresh_L002_R1.fastq.gz
+	wildcards: fastq=PYMT.AC.fresh_L002_R1
+Submitted DRMAA job (jobid 690843)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/PYMT-AC_QCexp_fresh/PYMT-AC_S1_L004_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.fresh_L004_R1.fastq.gz
+	wildcards: fastq=PYMT.AC.fresh_L004_R1
+Submitted DRMAA job (jobid 690844)
+rule rename_fastq:
+	input: /share/ScratchGeneral/briglo/dropseq/fastq/AC_24h-55924893/AC-24h_S5_L004_R1_001.fastq.gz
+	output: output/fastq_renamed/PYMT.AC.24hr_L004_R1.fastq.gz
+	wildcards: fastq=PYMT.AC.24hr_L004_R1
+Submitted DRMAA job (jobid 690845)
+rule build_bwt2:
+	input: data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.fa
+	output: data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.4.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.2.bt2
+	wildcards: genome=Mus_musculus.GRCm38.dna.primary_assembly
+Submitted DRMAA job (jobid 690846)
+1 of 205 steps (0.49%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.24hr_L004_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.24hr_L004_R1_fastqc.html
+	wildcards: lane=L004, read=R1, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690847)
+2 of 205 steps (0.98%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.fresh_L001_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.fresh_L001_R2_fastqc.html
+	wildcards: lane=L001, read=R2, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690848)
+3 of 205 steps (1%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.fresh_L001_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.fresh_L001_R2_fastqc.html
+	wildcards: lane=L001, read=R2, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690849)
+4 of 205 steps (2%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.fresh_L003_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.fresh_L003_R2_fastqc.html
+	wildcards: lane=L003, read=R2, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690850)
+5 of 205 steps (2%) done
+6 of 205 steps (3%) done
+7 of 205 steps (3%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.fresh_L004_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.fresh_L004_R2_fastqc.html
+	wildcards: lane=L004, read=R2, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690851)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.fresh_L003_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.fresh_L003_R2_fastqc.html
+	wildcards: lane=L003, read=R2, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690852)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.24hr_L003_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.24hr_L003_R2_fastqc.html
+	wildcards: lane=L003, read=R2, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690853)
+8 of 205 steps (4%) done
+9 of 205 steps (4%) done
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.BD.24hr_L004_R2.fastq.gz, output/fastq_renamed/PYMT.BD.24hr_L004_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.BD.24hr_L004.bam
+	log: output/01_FastqToBam/PYMT.BD.24hr_L004.FastqToBam.log
+	wildcards: lane=L004, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690854)
+10 of 205 steps (5%) done
+11 of 205 steps (5%) done
+12 of 205 steps (6%) done
+13 of 205 steps (6%) done
+14 of 205 steps (7%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.24hr_L004_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.24hr_L004_R2_fastqc.html
+	wildcards: lane=L004, read=R2, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690855)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.fresh_L002_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.fresh_L002_R2_fastqc.html
+	wildcards: lane=L002, read=R2, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690856)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.24hr_L001_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.24hr_L001_R2_fastqc.html
+	wildcards: lane=L001, read=R2, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690857)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.24hr_L003_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.24hr_L003_R2_fastqc.html
+	wildcards: lane=L003, read=R2, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690858)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.24hr_L001_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.24hr_L001_R1_fastqc.html
+	wildcards: lane=L001, read=R1, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690859)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.24hr_L004_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.24hr_L004_R2_fastqc.html
+	wildcards: lane=L004, read=R2, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690860)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.BD.24hr_L001_R2.fastq.gz, output/fastq_renamed/PYMT.BD.24hr_L001_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.BD.24hr_L001.bam
+	log: output/01_FastqToBam/PYMT.BD.24hr_L001.FastqToBam.log
+	wildcards: lane=L001, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690861)
+15 of 205 steps (7%) done
+16 of 205 steps (8%) done
+17 of 205 steps (8%) done
+18 of 205 steps (9%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.24hr_L001_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.24hr_L001_R2_fastqc.html
+	wildcards: lane=L001, read=R2, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690862)
+19 of 205 steps (9%) done
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.BD.24hr_L003_R2.fastq.gz, output/fastq_renamed/PYMT.BD.24hr_L003_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.BD.24hr_L003.bam
+	log: output/01_FastqToBam/PYMT.BD.24hr_L003.FastqToBam.log
+	wildcards: lane=L003, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690863)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.24hr_L003_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.24hr_L003_R1_fastqc.html
+	wildcards: lane=L003, read=R1, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690864)
+20 of 205 steps (10%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.fresh_L002_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.fresh_L002_R1_fastqc.html
+	wildcards: lane=L002, read=R1, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690865)
+21 of 205 steps (10%) done
+22 of 205 steps (11%) done
+23 of 205 steps (11%) done
+24 of 205 steps (12%) done
+25 of 205 steps (12%) done
+26 of 205 steps (13%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.fresh_L003_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.fresh_L003_R1_fastqc.html
+	wildcards: lane=L003, read=R1, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690866)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.BD.fresh_L003_R2.fastq.gz, output/fastq_renamed/PYMT.BD.fresh_L003_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.BD.fresh_L003.bam
+	log: output/01_FastqToBam/PYMT.BD.fresh_L003.FastqToBam.log
+	wildcards: lane=L003, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690867)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.24hr_L002_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.24hr_L002_R2_fastqc.html
+	wildcards: lane=L002, read=R2, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690868)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.fresh_L004_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.fresh_L004_R2_fastqc.html
+	wildcards: lane=L004, read=R2, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690869)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.fresh_L002_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.fresh_L002_R2_fastqc.html
+	wildcards: lane=L002, read=R2, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690870)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.fresh_L004_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.fresh_L004_R1_fastqc.html
+	wildcards: lane=L004, read=R1, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690871)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.BD.fresh_L002_R2.fastq.gz, output/fastq_renamed/PYMT.BD.fresh_L002_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.BD.fresh_L002.bam
+	log: output/01_FastqToBam/PYMT.BD.fresh_L002.FastqToBam.log
+	wildcards: lane=L002, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690872)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.BD.fresh_L004_R2.fastq.gz, output/fastq_renamed/PYMT.BD.fresh_L004_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.BD.fresh_L004.bam
+	log: output/01_FastqToBam/PYMT.BD.fresh_L004.FastqToBam.log
+	wildcards: lane=L004, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690873)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.fresh_L001_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.fresh_L001_R1_fastqc.html
+	wildcards: lane=L001, read=R1, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690874)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.AC.fresh_L001_R2.fastq.gz, output/fastq_renamed/PYMT.AC.fresh_L001_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.AC.fresh_L001.bam
+	log: output/01_FastqToBam/PYMT.AC.fresh_L001.FastqToBam.log
+	wildcards: lane=L001, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690875)
+27 of 205 steps (13%) done
+28 of 205 steps (14%) done
+29 of 205 steps (14%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.24hr_L002_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.24hr_L002_R1_fastqc.html
+	wildcards: lane=L002, read=R1, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690876)
+30 of 205 steps (15%) done
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.AC.24hr_L001_R2.fastq.gz, output/fastq_renamed/PYMT.AC.24hr_L001_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.AC.24hr_L001.bam
+	log: output/01_FastqToBam/PYMT.AC.24hr_L001.FastqToBam.log
+	wildcards: lane=L001, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690877)
+31 of 205 steps (15%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.24hr_L001_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.24hr_L001_R1_fastqc.html
+	wildcards: lane=L001, read=R1, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690878)
+32 of 205 steps (16%) done
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.24hr_L002_R2.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.24hr_L002_R2_fastqc.html
+	wildcards: lane=L002, read=R2, sample=PYMT.AC.24hr
+33 of 205 steps (16%) done
+Submitted DRMAA job (jobid 690879)
+34 of 205 steps (17%) done
+35 of 205 steps (17%) done
+36 of 205 steps (18%) done
+37 of 205 steps (18%) done
+38 of 205 steps (19%) done
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.AC.24hr_L002_R2.fastq.gz, output/fastq_renamed/PYMT.AC.24hr_L002_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.AC.24hr_L002.bam
+	log: output/01_FastqToBam/PYMT.AC.24hr_L002.FastqToBam.log
+	wildcards: lane=L002, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690880)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.BD.24hr_L002_R2.fastq.gz, output/fastq_renamed/PYMT.BD.24hr_L002_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.BD.24hr_L002.bam
+	log: output/01_FastqToBam/PYMT.BD.24hr_L002.FastqToBam.log
+	wildcards: lane=L002, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690881)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.AC.fresh_L003_R2.fastq.gz, output/fastq_renamed/PYMT.AC.fresh_L003_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.AC.fresh_L003.bam
+	log: output/01_FastqToBam/PYMT.AC.fresh_L003.FastqToBam.log
+	wildcards: lane=L003, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690882)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.BD.fresh_L001_R2.fastq.gz, output/fastq_renamed/PYMT.BD.fresh_L001_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.BD.fresh_L001.bam
+	log: output/01_FastqToBam/PYMT.BD.fresh_L001.FastqToBam.log
+	wildcards: lane=L001, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690883)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.fresh_L004_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.fresh_L004_R1_fastqc.html
+	wildcards: lane=L004, read=R1, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690884)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.fresh_L002_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.fresh_L002_R1_fastqc.html
+	wildcards: lane=L002, read=R1, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690885)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.24hr_L002_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.24hr_L002_R1_fastqc.html
+	wildcards: lane=L002, read=R1, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690886)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.BD.fresh_L001_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.BD.fresh_L001_R1_fastqc.html
+	wildcards: lane=L001, read=R1, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690887)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.AC.fresh_L002_R2.fastq.gz, output/fastq_renamed/PYMT.AC.fresh_L002_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.AC.fresh_L002.bam
+	log: output/01_FastqToBam/PYMT.AC.fresh_L002.FastqToBam.log
+	wildcards: lane=L002, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690888)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.AC.fresh_L004_R2.fastq.gz, output/fastq_renamed/PYMT.AC.fresh_L004_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.AC.fresh_L004.bam
+	log: output/01_FastqToBam/PYMT.AC.fresh_L004.FastqToBam.log
+	wildcards: lane=L004, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690889)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.24hr_L003_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.24hr_L003_R1_fastqc.html
+	wildcards: lane=L003, read=R1, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690890)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.fresh_L003_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.fresh_L003_R1_fastqc.html
+	wildcards: lane=L003, read=R1, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690891)
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.AC.24hr_L003_R2.fastq.gz, output/fastq_renamed/PYMT.AC.24hr_L003_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.AC.24hr_L003.bam
+	log: output/01_FastqToBam/PYMT.AC.24hr_L003.FastqToBam.log
+	wildcards: lane=L003, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690892)
+39 of 205 steps (19%) done
+40 of 205 steps (20%) done
+41 of 205 steps (20%) done
+rule FastqToBam:
+	input: output/fastq_renamed/PYMT.AC.24hr_L004_R2.fastq.gz, output/fastq_renamed/PYMT.AC.24hr_L004_R1.fastq.gz
+	output: output/01_FastqToBam/PYMT.AC.24hr_L004.bam
+	log: output/01_FastqToBam/PYMT.AC.24hr_L004.FastqToBam.log
+	wildcards: lane=L004, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690893)
+rule fastqc_separate_lanes:
+	input: output/fastq_renamed/PYMT.AC.24hr_L004_R1.fastq.gz
+	output: output/fastqc/separate_lanes/PYMT.AC.24hr_L004_R1_fastqc.html
+	wildcards: lane=L004, read=R1, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690894)
+42 of 205 steps (20%) done
+43 of 205 steps (21%) done
+44 of 205 steps (21%) done
+45 of 205 steps (22%) done
+46 of 205 steps (22%) done
+47 of 205 steps (23%) done
+48 of 205 steps (23%) done
+49 of 205 steps (24%) done
+50 of 205 steps (24%) done
+51 of 205 steps (25%) done
+52 of 205 steps (25%) done
+53 of 205 steps (26%) done
+54 of 205 steps (26%) done
+55 of 205 steps (27%) done
+56 of 205 steps (27%) done
+57 of 205 steps (28%) done
+58 of 205 steps (28%) done
+59 of 205 steps (29%) done
+60 of 205 steps (29%) done
+61 of 205 steps (30%) done
+62 of 205 steps (30%) done
+63 of 205 steps (31%) done
+64 of 205 steps (31%) done
+65 of 205 steps (32%) done
+66 of 205 steps (32%) done
+67 of 205 steps (33%) done
+68 of 205 steps (33%) done
+69 of 205 steps (34%) done
+70 of 205 steps (34%) done
+71 of 205 steps (35%) done
+72 of 205 steps (35%) done
+rule MergeBam:
+	input: output/01_FastqToBam/PYMT.BD.24hr_L003.bam, output/01_FastqToBam/PYMT.BD.24hr_L002.bam, output/01_FastqToBam/PYMT.BD.24hr_L001.bam, output/01_FastqToBam/PYMT.BD.24hr_L004.bam
+	output: output/01_FastqToBam_mergeBam/PYMT.BD.24hr.bam
+	log: output/01_FastqToBam_mergeBam/PYMT.BD.24hr.MergeSamFiles.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690899)
+73 of 205 steps (36%) done
+74 of 205 steps (36%) done
+75 of 205 steps (37%) done
+76 of 205 steps (37%) done
+77 of 205 steps (38%) done
+78 of 205 steps (38%) done
+79 of 205 steps (39%) done
+80 of 205 steps (39%) done
+81 of 205 steps (40%) done
+82 of 205 steps (40%) done
+rule collate_fastqc_separate_lanes:
+	input: output/fastqc/separate_lanes/PYMT.BD.fresh_L001_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.24hr_L001_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.24hr_L001_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.fresh_L001_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.fresh_L001_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.24hr_L001_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.24hr_L001_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.fresh_L001_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.fresh_L002_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.24hr_L002_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.24hr_L002_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.fresh_L002_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.fresh_L002_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.24hr_L002_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.24hr_L002_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.fresh_L002_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.fresh_L003_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.24hr_L003_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.24hr_L003_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.fresh_L003_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.fresh_L003_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.24hr_L003_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.24hr_L003_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.fresh_L003_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.fresh_L004_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.24hr_L004_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.24hr_L004_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.fresh_L004_R1_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.fresh_L004_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.24hr_L004_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.BD.24hr_L004_R2_fastqc.html, output/fastqc/separate_lanes/PYMT.AC.fresh_L004_R2_fastqc.html
+	output: output/fastqc/separate_lanes/fastqc_collated.csv, output/fastqc/separate_lanes/fastqc_collated.html
+Submitted DRMAA job (jobid 690901)
+83 of 205 steps (40%) done
+84 of 205 steps (41%) done
+85 of 205 steps (41%) done
+86 of 205 steps (42%) done
+87 of 205 steps (42%) done
+rule MergeBam:
+	input: output/01_FastqToBam/PYMT.AC.24hr_L003.bam, output/01_FastqToBam/PYMT.AC.24hr_L002.bam, output/01_FastqToBam/PYMT.AC.24hr_L001.bam, output/01_FastqToBam/PYMT.AC.24hr_L004.bam
+	output: output/01_FastqToBam_mergeBam/PYMT.AC.24hr.bam
+	log: output/01_FastqToBam_mergeBam/PYMT.AC.24hr.MergeSamFiles.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690904)
+88 of 205 steps (43%) done
+rule MergeBam:
+	input: output/01_FastqToBam/PYMT.BD.fresh_L003.bam, output/01_FastqToBam/PYMT.BD.fresh_L002.bam, output/01_FastqToBam/PYMT.BD.fresh_L001.bam, output/01_FastqToBam/PYMT.BD.fresh_L004.bam
+	output: output/01_FastqToBam_mergeBam/PYMT.BD.fresh.bam
+	log: output/01_FastqToBam_mergeBam/PYMT.BD.fresh.MergeSamFiles.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690905)
+89 of 205 steps (43%) done
+90 of 205 steps (44%) done
+rule MergeBam:
+	input: output/01_FastqToBam/PYMT.AC.fresh_L003.bam, output/01_FastqToBam/PYMT.AC.fresh_L002.bam, output/01_FastqToBam/PYMT.AC.fresh_L001.bam, output/01_FastqToBam/PYMT.AC.fresh_L004.bam
+	output: output/01_FastqToBam_mergeBam/PYMT.AC.fresh.bam
+	log: output/01_FastqToBam_mergeBam/PYMT.AC.fresh.MergeSamFiles.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690907)
+Removing temporary output file output/01_FastqToBam/PYMT.BD.24hr_L003.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.BD.24hr_L002.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.BD.24hr_L001.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.BD.24hr_L004.bam.
+91 of 205 steps (44%) done
+rule TagCellBarcodes:
+	input: output/01_FastqToBam_mergeBam/PYMT.BD.24hr.bam
+	output: output/02_TagCellBarcodes/PYMT.BD.24hr.unaligned_tagged_cell_summary.txt, output/02_TagCellBarcodes/PYMT.BD.24hr.bam
+	log: output/02_TagCellBarcodes/PYMT.BD.24hr.TagBamWithReadSequenceExtended.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690919)
+Removing temporary output file output/01_FastqToBam/PYMT.AC.24hr_L003.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.AC.24hr_L002.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.AC.24hr_L004.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.AC.24hr_L001.bam.
+92 of 205 steps (45%) done
+rule TagCellBarcodes:
+	input: output/01_FastqToBam_mergeBam/PYMT.AC.24hr.bam
+	output: output/02_TagCellBarcodes/PYMT.AC.24hr.unaligned_tagged_cell_summary.txt, output/02_TagCellBarcodes/PYMT.AC.24hr.bam
+	log: output/02_TagCellBarcodes/PYMT.AC.24hr.TagBamWithReadSequenceExtended.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690941)
+93 of 205 steps (45%) done
+rule TagMolecularBarcodes:
+	input: output/02_TagCellBarcodes/PYMT.BD.24hr.bam
+	output: output/03_TagMolecularBarcodes/PYMT.BD.24hr.unaligned_tagged_cell_molecular.summary.txt, output/03_TagMolecularBarcodes/PYMT.BD.24hr.bam
+	log: output/03_TagMolecularBarcodes/PYMT.BD.24hr.TagBamWithReadSequenceExtended.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690942)
+94 of 205 steps (46%) done
+rule TagMolecularBarcodes:
+	input: output/02_TagCellBarcodes/PYMT.AC.24hr.bam
+	output: output/03_TagMolecularBarcodes/PYMT.AC.24hr.unaligned_tagged_cell_molecular.summary.txt, output/03_TagMolecularBarcodes/PYMT.AC.24hr.bam
+	log: output/03_TagMolecularBarcodes/PYMT.AC.24hr.TagBamWithReadSequenceExtended.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690948)
+Removing temporary output file output/02_TagCellBarcodes/PYMT.BD.24hr.bam.
+95 of 205 steps (46%) done
+rule FilterBAM:
+	input: output/03_TagMolecularBarcodes/PYMT.BD.24hr.bam
+	output: output/04_FilterBAM/PYMT.BD.24hr.bam
+	log: output/04_FilterBAM/PYMT.BD.24hr.FilterBam.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690949)
+Removing temporary output file output/01_FastqToBam/PYMT.AC.fresh_L002.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.AC.fresh_L004.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.AC.fresh_L003.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.AC.fresh_L001.bam.
+96 of 205 steps (47%) done
+rule TagCellBarcodes:
+	input: output/01_FastqToBam_mergeBam/PYMT.AC.fresh.bam
+	output: output/02_TagCellBarcodes/PYMT.AC.fresh.unaligned_tagged_cell_summary.txt, output/02_TagCellBarcodes/PYMT.AC.fresh.bam
+	log: output/02_TagCellBarcodes/PYMT.AC.fresh.TagBamWithReadSequenceExtended.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690951)
+Removing temporary output file output/03_TagMolecularBarcodes/PYMT.BD.24hr.bam.
+97 of 205 steps (47%) done
+rule TrimStartingSequence:
+	input: output/04_FilterBAM/PYMT.BD.24hr.bam
+	output: output/05_TrimStartingSequence/PYMT.BD.24hr.unaligned_tagged_filtered_smart.summary.txt, output/05_TrimStartingSequence/PYMT.BD.24hr.bam
+	log: output/05_TrimStartingSequence/PYMT.BD.24hr.TrimStartingSequence.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690952)
+Removing temporary output file output/04_FilterBAM/PYMT.BD.24hr.bam.
+98 of 205 steps (48%) done
+rule PolyATrimmer:
+	input: output/05_TrimStartingSequence/PYMT.BD.24hr.bam
+	output: output/06_PolyATrimmer/PYMT.BD.24hr.unaligned_tagged_trimmed_polyA.summary.txt, output/06_PolyATrimmer/PYMT.BD.24hr.bam
+	log: output/06_PolyATrimmer/PYMT.BD.24hr.PolyATrimmer.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690964)
+Removing temporary output file output/01_FastqToBam/PYMT.BD.fresh_L001.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.BD.fresh_L004.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.BD.fresh_L002.bam.
+Removing temporary output file output/01_FastqToBam/PYMT.BD.fresh_L003.bam.
+99 of 205 steps (48%) done
+rule TagCellBarcodes:
+	input: output/01_FastqToBam_mergeBam/PYMT.BD.fresh.bam
+	output: output/02_TagCellBarcodes/PYMT.BD.fresh.unaligned_tagged_cell_summary.txt, output/02_TagCellBarcodes/PYMT.BD.fresh.bam
+	log: output/02_TagCellBarcodes/PYMT.BD.fresh.TagBamWithReadSequenceExtended.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690965)
+Removing temporary output file output/02_TagCellBarcodes/PYMT.AC.24hr.bam.
+100 of 205 steps (49%) done
+rule FilterBAM:
+	input: output/03_TagMolecularBarcodes/PYMT.AC.24hr.bam
+	output: output/04_FilterBAM/PYMT.AC.24hr.bam
+	log: output/04_FilterBAM/PYMT.AC.24hr.FilterBam.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690966)
+Removing temporary output file output/05_TrimStartingSequence/PYMT.BD.24hr.bam.
+101 of 205 steps (49%) done
+rule SamToFastq:
+	input: output/06_PolyATrimmer/PYMT.BD.24hr.bam
+	output: output/07_SamToFastq/PYMT.BD.24hr.fastq
+	log: output/07_SamToFastq/PYMT.BD.24hr.SamToFastq.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690967)
+102 of 205 steps (50%) done
+Removing temporary output file output/03_TagMolecularBarcodes/PYMT.AC.24hr.bam.
+103 of 205 steps (50%) done
+rule TrimStartingSequence:
+	input: output/04_FilterBAM/PYMT.AC.24hr.bam
+	output: output/05_TrimStartingSequence/PYMT.AC.24hr.unaligned_tagged_filtered_smart.summary.txt, output/05_TrimStartingSequence/PYMT.AC.24hr.bam
+	log: output/05_TrimStartingSequence/PYMT.AC.24hr.TrimStartingSequence.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690978)
+104 of 205 steps (51%) done
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.24hr_L002_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.24hr_L002_R2_screen.txt
+	wildcards: lane=L002, read=R2, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690979)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.fresh_L002_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.fresh_L002_R1_screen.txt
+	wildcards: lane=L002, read=R1, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690980)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.fresh_L001_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.fresh_L001_R1_screen.txt
+	wildcards: lane=L001, read=R1, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690981)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.24hr_L001_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.24hr_L001_R2_screen.txt
+	wildcards: lane=L001, read=R2, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690982)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.fresh_L002_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.fresh_L002_R2_screen.txt
+	wildcards: lane=L002, read=R2, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690983)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.24hr_L003_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.24hr_L003_R1_screen.txt
+	wildcards: lane=L003, read=R1, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690984)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.fresh_L004_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.fresh_L004_R1_screen.txt
+	wildcards: lane=L004, read=R1, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690985)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.fresh_L001_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.fresh_L001_R2_screen.txt
+	wildcards: lane=L001, read=R2, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690986)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.24hr_L004_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.24hr_L004_R2_screen.txt
+	wildcards: lane=L004, read=R2, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690987)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.24hr_L001_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.24hr_L001_R1_screen.txt
+	wildcards: lane=L001, read=R1, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690988)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.fresh_L004_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.fresh_L004_R2_screen.txt
+	wildcards: lane=L004, read=R2, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690989)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.fresh_L003_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.fresh_L003_R1_screen.txt
+	wildcards: lane=L003, read=R1, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690990)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.fresh_L003_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.fresh_L003_R2_screen.txt
+	wildcards: lane=L003, read=R2, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690991)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.fresh_L003_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.fresh_L003_R1_screen.txt
+	wildcards: lane=L003, read=R1, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 690992)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.24hr_L002_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.24hr_L002_R1_screen.txt
+	wildcards: lane=L002, read=R1, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690993)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.24hr_L002_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.24hr_L002_R1_screen.txt
+	wildcards: lane=L002, read=R1, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690994)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.24hr_L003_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.24hr_L003_R2_screen.txt
+	wildcards: lane=L003, read=R2, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690995)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.24hr_L002_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.24hr_L002_R2_screen.txt
+	wildcards: lane=L002, read=R2, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690996)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.24hr_L001_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.24hr_L001_R2_screen.txt
+	wildcards: lane=L001, read=R2, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 690997)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.24hr_L004_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.24hr_L004_R1_screen.txt
+	wildcards: lane=L004, read=R1, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 690998)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.fresh_L002_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.fresh_L002_R1_screen.txt
+	wildcards: lane=L002, read=R1, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 690999)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.24hr_L003_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.24hr_L003_R1_screen.txt
+	wildcards: lane=L003, read=R1, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 691000)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.fresh_L002_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.fresh_L002_R2_screen.txt
+	wildcards: lane=L002, read=R2, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 691001)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.24hr_L004_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.24hr_L004_R2_screen.txt
+	wildcards: lane=L004, read=R2, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 691002)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.24hr_L004_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.24hr_L004_R1_screen.txt
+	wildcards: lane=L004, read=R1, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 691003)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.fresh_L001_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.fresh_L001_R1_screen.txt
+	wildcards: lane=L001, read=R1, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 691004)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.fresh_L004_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.fresh_L004_R2_screen.txt
+	wildcards: lane=L004, read=R2, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 691005)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.fresh_L004_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.fresh_L004_R1_screen.txt
+	wildcards: lane=L004, read=R1, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 691006)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.24hr_L003_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.24hr_L003_R2_screen.txt
+	wildcards: lane=L003, read=R2, sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 691007)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.BD.fresh_L003_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.BD.fresh_L003_R2_screen.txt
+	wildcards: lane=L003, read=R2, sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 691008)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.fresh_L001_R2.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.fresh_L001_R2_screen.txt
+	wildcards: lane=L001, read=R2, sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 691009)
+rule fastqscreen_raw:
+	input: output/fastq_renamed/PYMT.AC.24hr_L001_R1.fastq.gz, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2
+	output: output/fastqscreen/separate_lanes/PYMT.AC.24hr_L001_R1_screen.txt
+	wildcards: lane=L001, read=R1, sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 691010)
+Removing temporary output file output/fastq_renamed/PYMT.BD.24hr_L002_R2.fastq.gz.
+105 of 205 steps (51%) done
+106 of 205 steps (52%) done
+rule AlignSTAR:
+	input: output/07_SamToFastq/PYMT.BD.24hr.fastq
+	output: output/08_AlignSTAR/PYMT.BD.24hr.star.Log.out, output/08_AlignSTAR/PYMT.BD.24hr.star.Aligned.out.sam, output/08_AlignSTAR/PYMT.BD.24hr.star.Log.final.out, output/08_AlignSTAR/PYMT.BD.24hr.star.SJ.out.tab, output/08_AlignSTAR/PYMT.BD.24hr.star.Log.progress.out
+	log: output/08_AlignSTAR/PYMT.BD.24hr.STAR.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 691039)
+Removing temporary output file output/fastq_renamed/PYMT.BD.fresh_L002_R1.fastq.gz.
+107 of 205 steps (52%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.fresh_L001_R1.fastq.gz.
+108 of 205 steps (53%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.24hr_L001_R2.fastq.gz.
+109 of 205 steps (53%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.24hr_L003_R1.fastq.gz.
+110 of 205 steps (54%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.fresh_L002_R2.fastq.gz.
+111 of 205 steps (54%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.fresh_L004_R1.fastq.gz.
+112 of 205 steps (55%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.24hr_L001_R1.fastq.gz.
+113 of 205 steps (55%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.fresh_L001_R2.fastq.gz.
+114 of 205 steps (56%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.24hr_L004_R2.fastq.gz.
+115 of 205 steps (56%) done
+Removing temporary output file output/04_FilterBAM/PYMT.AC.24hr.bam.
+116 of 205 steps (57%) done
+rule PolyATrimmer:
+	input: output/05_TrimStartingSequence/PYMT.AC.24hr.bam
+	output: output/06_PolyATrimmer/PYMT.AC.24hr.unaligned_tagged_trimmed_polyA.summary.txt, output/06_PolyATrimmer/PYMT.AC.24hr.bam
+	log: output/06_PolyATrimmer/PYMT.AC.24hr.PolyATrimmer.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 691048)
+Removing temporary output file output/fastq_renamed/PYMT.AC.fresh_L003_R1.fastq.gz.
+117 of 205 steps (57%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.fresh_L003_R2.fastq.gz.
+118 of 205 steps (58%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.fresh_L004_R2.fastq.gz.
+119 of 205 steps (58%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.24hr_L002_R1.fastq.gz.
+120 of 205 steps (59%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.24hr_L002_R1.fastq.gz.
+121 of 205 steps (59%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.24hr_L003_R2.fastq.gz.
+122 of 205 steps (60%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.fresh_L003_R1.fastq.gz.
+123 of 205 steps (60%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.24hr_L002_R2.fastq.gz.
+124 of 205 steps (60%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.24hr_L001_R2.fastq.gz.
+125 of 205 steps (61%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.24hr_L004_R1.fastq.gz.
+126 of 205 steps (61%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.fresh_L002_R1.fastq.gz.
+127 of 205 steps (62%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.24hr_L003_R1.fastq.gz.
+128 of 205 steps (62%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.24hr_L004_R2.fastq.gz.
+129 of 205 steps (63%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.24hr_L004_R1.fastq.gz.
+130 of 205 steps (63%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.fresh_L002_R2.fastq.gz.
+131 of 205 steps (64%) done
+Removing temporary output file output/05_TrimStartingSequence/PYMT.AC.24hr.bam.
+132 of 205 steps (64%) done
+rule SamToFastq:
+	input: output/06_PolyATrimmer/PYMT.AC.24hr.bam
+	output: output/07_SamToFastq/PYMT.AC.24hr.fastq
+	log: output/07_SamToFastq/PYMT.AC.24hr.SamToFastq.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 691051)
+Removing temporary output file output/fastq_renamed/PYMT.BD.fresh_L001_R1.fastq.gz.
+133 of 205 steps (65%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.fresh_L004_R2.fastq.gz.
+134 of 205 steps (65%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.fresh_L004_R1.fastq.gz.
+135 of 205 steps (66%) done
+136 of 205 steps (66%) done
+rule TagMolecularBarcodes:
+	input: output/02_TagCellBarcodes/PYMT.AC.fresh.bam
+	output: output/03_TagMolecularBarcodes/PYMT.AC.fresh.unaligned_tagged_cell_molecular.summary.txt, output/03_TagMolecularBarcodes/PYMT.AC.fresh.bam
+	log: output/03_TagMolecularBarcodes/PYMT.AC.fresh.TagBamWithReadSequenceExtended.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 691052)
+Removing temporary output file output/fastq_renamed/PYMT.BD.24hr_L003_R2.fastq.gz.
+137 of 205 steps (67%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.fresh_L001_R2.fastq.gz.
+138 of 205 steps (67%) done
+Removing temporary output file output/fastq_renamed/PYMT.AC.24hr_L001_R1.fastq.gz.
+139 of 205 steps (68%) done
+Removing temporary output file output/fastq_renamed/PYMT.BD.fresh_L003_R2.fastq.gz.
+140 of 205 steps (68%) done
+141 of 205 steps (69%) done
+rule AlignSTAR:
+	input: output/07_SamToFastq/PYMT.AC.24hr.fastq
+	output: output/08_AlignSTAR/PYMT.AC.24hr.star.Log.out, output/08_AlignSTAR/PYMT.AC.24hr.star.Aligned.out.sam, output/08_AlignSTAR/PYMT.AC.24hr.star.Log.final.out, output/08_AlignSTAR/PYMT.AC.24hr.star.SJ.out.tab, output/08_AlignSTAR/PYMT.AC.24hr.star.Log.progress.out
+	log: output/08_AlignSTAR/PYMT.AC.24hr.STAR.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 691056)
+142 of 205 steps (69%) done
+rule SortSamAligned:
+	input: output/08_AlignSTAR/PYMT.BD.24hr.star.Aligned.out.sam
+	output: output/09_SortSamAligned/PYMT.BD.24hr.bam
+	log: output/09_SortSamAligned/PYMT.BD.24hr.SortSam.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 691057)
+143 of 205 steps (70%) done
+rule TagMolecularBarcodes:
+	input: output/02_TagCellBarcodes/PYMT.BD.fresh.bam
+	output: output/03_TagMolecularBarcodes/PYMT.BD.fresh.unaligned_tagged_cell_molecular.summary.txt, output/03_TagMolecularBarcodes/PYMT.BD.fresh.bam
+	log: output/03_TagMolecularBarcodes/PYMT.BD.fresh.TagBamWithReadSequenceExtended.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 691058)
+144 of 205 steps (70%) done
+rule SortSamAligned:
+	input: output/08_AlignSTAR/PYMT.AC.24hr.star.Aligned.out.sam
+	output: output/09_SortSamAligned/PYMT.AC.24hr.bam
+	log: output/09_SortSamAligned/PYMT.AC.24hr.SortSam.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 691059)
+Removing temporary output file output/08_AlignSTAR/PYMT.BD.24hr.star.Aligned.out.sam.
+145 of 205 steps (71%) done
+rule MergeAndTagAlignedBam:
+	input: output/06_PolyATrimmer/PYMT.BD.24hr.bam, output/09_SortSamAligned/PYMT.BD.24hr.bam, /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/mm10_mod.fa, /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/mm10_mod.dict, output/09_SortSamAligned/PYMT.BD.24hr.bam
+	output: output/10_MergeAndTagAlignedBam/PYMT.BD.24hr.bam
+	log: output/10_MergeAndTagAlignedBam/PYMT.BD.24hr.MergeBamAlignment.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 691063)
+Removing temporary output file output/02_TagCellBarcodes/PYMT.AC.fresh.bam.
+146 of 205 steps (71%) done
+rule FilterBAM:
+	input: output/03_TagMolecularBarcodes/PYMT.AC.fresh.bam
+	output: output/04_FilterBAM/PYMT.AC.fresh.bam
+	log: output/04_FilterBAM/PYMT.AC.fresh.FilterBam.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692008)
+Removing temporary output file output/08_AlignSTAR/PYMT.AC.24hr.star.Aligned.out.sam.
+147 of 205 steps (72%) done
+rule MergeAndTagAlignedBam:
+	input: output/06_PolyATrimmer/PYMT.AC.24hr.bam, output/09_SortSamAligned/PYMT.AC.24hr.bam, /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/mm10_mod.fa, /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/mm10_mod.dict, output/09_SortSamAligned/PYMT.AC.24hr.bam
+	output: output/10_MergeAndTagAlignedBam/PYMT.AC.24hr.bam
+	log: output/10_MergeAndTagAlignedBam/PYMT.AC.24hr.MergeBamAlignment.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 692009)
+148 of 205 steps (72%) done
+rule TagReadWithGeneExon:
+	input: /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/vM14_mod.refFlat, output/10_MergeAndTagAlignedBam/PYMT.BD.24hr.bam
+	output: output/11_TagReadWithGeneExon/PYMT.BD.24hr.bai, output/11_TagReadWithGeneExon/PYMT.BD.24hr.bam
+	log: output/11_TagReadWithGeneExon/PYMT.BD.24hr.TagReadWithGeneExon.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 692032)
+Removing temporary output file output/03_TagMolecularBarcodes/PYMT.AC.fresh.bam.
+149 of 205 steps (73%) done
+rule TrimStartingSequence:
+	input: output/04_FilterBAM/PYMT.AC.fresh.bam
+	output: output/05_TrimStartingSequence/PYMT.AC.fresh.unaligned_tagged_filtered_smart.summary.txt, output/05_TrimStartingSequence/PYMT.AC.fresh.bam
+	log: output/05_TrimStartingSequence/PYMT.AC.fresh.TrimStartingSequence.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692070)
+150 of 205 steps (73%) done
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.24hr.bam
+	output: output/14_DGE/PYMT.BD.24hr.1000_barcodes.dge.summary.txt, output/14_DGE/PYMT.BD.24hr.1000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.BD.24hr.1000.DGE.log
+	wildcards: sample=PYMT.BD.24hr, num_barcodes=1000
+Submitted DRMAA job (jobid 692071)
+rule DetectBeadSynthesisErrors:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.24hr.bai, output/11_TagReadWithGeneExon/PYMT.BD.24hr.bam
+	output: output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.summary.txt, output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.bam, output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.stats.txt
+	log: output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.DetectBeadSynthesisErrors.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 692072)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.24hr.bam
+	output: output/14_DGE/PYMT.BD.24hr.10000_barcodes.dge.summary.txt, output/14_DGE/PYMT.BD.24hr.10000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.BD.24hr.10000.DGE.log
+	wildcards: sample=PYMT.BD.24hr, num_barcodes=10000
+Submitted DRMAA job (jobid 692073)
+rule EstimateCellNumbers:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.24hr.bai, output/11_TagReadWithGeneExon/PYMT.BD.24hr.bam
+	output: output/13_EstimateCellNumbers/PYMT.BD.24hr.cell_readcounts.txt
+	log: output/13_EstimateCellNumbers/PYMT.BD.24hr.EstimateCellNumbers.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 692074)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.24hr.bam
+	output: output/14_DGE/PYMT.BD.24hr.3000_barcodes.dge.summary.txt, output/14_DGE/PYMT.BD.24hr.3000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.BD.24hr.3000.DGE.log
+	wildcards: sample=PYMT.BD.24hr, num_barcodes=3000
+Submitted DRMAA job (jobid 692075)
+151 of 205 steps (74%) done
+152 of 205 steps (74%) done
+rule TagReadWithGeneExon:
+	input: /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/vM14_mod.refFlat, output/10_MergeAndTagAlignedBam/PYMT.AC.24hr.bam
+	output: output/11_TagReadWithGeneExon/PYMT.AC.24hr.bai, output/11_TagReadWithGeneExon/PYMT.AC.24hr.bam
+	log: output/11_TagReadWithGeneExon/PYMT.AC.24hr.TagReadWithGeneExon.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 692087)
+153 of 205 steps (75%) done
+154 of 205 steps (75%) done
+155 of 205 steps (76%) done
+Removing temporary output file output/02_TagCellBarcodes/PYMT.BD.fresh.bam.
+156 of 205 steps (76%) done
+rule FilterBAM:
+	input: output/03_TagMolecularBarcodes/PYMT.BD.fresh.bam
+	output: output/04_FilterBAM/PYMT.BD.fresh.bam
+	log: output/04_FilterBAM/PYMT.BD.fresh.FilterBam.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692089)
+157 of 205 steps (77%) done
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.3000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.3000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.3000.DGE.log
+	wildcards: sample=PYMT.BD.24hr, num_barcodes=3000
+Submitted DRMAA job (jobid 692091)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.10000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.10000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.10000.DGE.log
+	wildcards: sample=PYMT.BD.24hr, num_barcodes=10000
+Submitted DRMAA job (jobid 692092)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.1000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.1000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.1000.DGE.log
+	wildcards: sample=PYMT.BD.24hr, num_barcodes=1000
+Submitted DRMAA job (jobid 692093)
+rule EstimateCellNumbers_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.bam
+	output: output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.cell_readcounts.txt
+	log: output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.EstimateCellNumbers_BeadSynthesisErrorsCorrected.log
+	wildcards: sample=PYMT.BD.24hr
+Submitted DRMAA job (jobid 692094)
+158 of 205 steps (77%) done
+Removing temporary output file output/04_FilterBAM/PYMT.AC.fresh.bam.
+159 of 205 steps (78%) done
+rule PolyATrimmer:
+	input: output/05_TrimStartingSequence/PYMT.AC.fresh.bam
+	output: output/06_PolyATrimmer/PYMT.AC.fresh.unaligned_tagged_trimmed_polyA.summary.txt, output/06_PolyATrimmer/PYMT.AC.fresh.bam
+	log: output/06_PolyATrimmer/PYMT.AC.fresh.PolyATrimmer.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692095)
+160 of 205 steps (78%) done
+161 of 205 steps (79%) done
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.24hr.bam
+	output: output/14_DGE/PYMT.AC.24hr.3000_barcodes.dge.summary.txt, output/14_DGE/PYMT.AC.24hr.3000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.AC.24hr.3000.DGE.log
+	wildcards: sample=PYMT.AC.24hr, num_barcodes=3000
+Submitted DRMAA job (jobid 692097)
+rule DetectBeadSynthesisErrors:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.24hr.bai, output/11_TagReadWithGeneExon/PYMT.AC.24hr.bam
+	output: output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.summary.txt, output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.bam, output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.stats.txt
+	log: output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.DetectBeadSynthesisErrors.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 692098)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.24hr.bam
+	output: output/14_DGE/PYMT.AC.24hr.1000_barcodes.dge.summary.txt, output/14_DGE/PYMT.AC.24hr.1000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.AC.24hr.1000.DGE.log
+	wildcards: sample=PYMT.AC.24hr, num_barcodes=1000
+Submitted DRMAA job (jobid 692099)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.24hr.bam
+	output: output/14_DGE/PYMT.AC.24hr.10000_barcodes.dge.summary.txt, output/14_DGE/PYMT.AC.24hr.10000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.AC.24hr.10000.DGE.log
+	wildcards: sample=PYMT.AC.24hr, num_barcodes=10000
+Submitted DRMAA job (jobid 692100)
+rule EstimateCellNumbers:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.24hr.bai, output/11_TagReadWithGeneExon/PYMT.AC.24hr.bam
+	output: output/13_EstimateCellNumbers/PYMT.AC.24hr.cell_readcounts.txt
+	log: output/13_EstimateCellNumbers/PYMT.AC.24hr.EstimateCellNumbers.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 692101)
+162 of 205 steps (79%) done
+163 of 205 steps (80%) done
+164 of 205 steps (80%) done
+Removing temporary output file output/03_TagMolecularBarcodes/PYMT.BD.fresh.bam.
+165 of 205 steps (80%) done
+rule TrimStartingSequence:
+	input: output/04_FilterBAM/PYMT.BD.fresh.bam
+	output: output/05_TrimStartingSequence/PYMT.BD.fresh.unaligned_tagged_filtered_smart.summary.txt, output/05_TrimStartingSequence/PYMT.BD.fresh.bam
+	log: output/05_TrimStartingSequence/PYMT.BD.fresh.TrimStartingSequence.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692104)
+166 of 205 steps (81%) done
+167 of 205 steps (81%) done
+168 of 205 steps (82%) done
+Removing temporary output file output/05_TrimStartingSequence/PYMT.AC.fresh.bam.
+169 of 205 steps (82%) done
+rule SamToFastq:
+	input: output/06_PolyATrimmer/PYMT.AC.fresh.bam
+	output: output/07_SamToFastq/PYMT.AC.fresh.fastq
+	log: output/07_SamToFastq/PYMT.AC.fresh.SamToFastq.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692107)
+170 of 205 steps (83%) done
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.1000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.1000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.1000.DGE.log
+	wildcards: sample=PYMT.AC.24hr, num_barcodes=1000
+Submitted DRMAA job (jobid 692131)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.10000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.10000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.10000.DGE.log
+	wildcards: sample=PYMT.AC.24hr, num_barcodes=10000
+Submitted DRMAA job (jobid 692132)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.3000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.3000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.3000.DGE.log
+	wildcards: sample=PYMT.AC.24hr, num_barcodes=3000
+Submitted DRMAA job (jobid 692133)
+rule EstimateCellNumbers_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.bam
+	output: output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.cell_readcounts.txt
+	log: output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.EstimateCellNumbers_BeadSynthesisErrorsCorrected.log
+	wildcards: sample=PYMT.AC.24hr
+Submitted DRMAA job (jobid 692134)
+171 of 205 steps (83%) done
+172 of 205 steps (84%) done
+Removing temporary output file output/04_FilterBAM/PYMT.BD.fresh.bam.
+173 of 205 steps (84%) done
+rule PolyATrimmer:
+	input: output/05_TrimStartingSequence/PYMT.BD.fresh.bam
+	output: output/06_PolyATrimmer/PYMT.BD.fresh.unaligned_tagged_trimmed_polyA.summary.txt, output/06_PolyATrimmer/PYMT.BD.fresh.bam
+	log: output/06_PolyATrimmer/PYMT.BD.fresh.PolyATrimmer.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692150)
+174 of 205 steps (85%) done
+175 of 205 steps (85%) done
+176 of 205 steps (86%) done
+rule AlignSTAR:
+	input: output/07_SamToFastq/PYMT.AC.fresh.fastq
+	output: output/08_AlignSTAR/PYMT.AC.fresh.star.Log.out, output/08_AlignSTAR/PYMT.AC.fresh.star.Aligned.out.sam, output/08_AlignSTAR/PYMT.AC.fresh.star.Log.final.out, output/08_AlignSTAR/PYMT.AC.fresh.star.SJ.out.tab, output/08_AlignSTAR/PYMT.AC.fresh.star.Log.progress.out
+	log: output/08_AlignSTAR/PYMT.AC.fresh.STAR.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692154)
+177 of 205 steps (86%) done
+rule SortSamAligned:
+	input: output/08_AlignSTAR/PYMT.AC.fresh.star.Aligned.out.sam
+	output: output/09_SortSamAligned/PYMT.AC.fresh.bam
+	log: output/09_SortSamAligned/PYMT.AC.fresh.SortSam.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692237)
+Removing temporary output file output/05_TrimStartingSequence/PYMT.BD.fresh.bam.
+178 of 205 steps (87%) done
+rule SamToFastq:
+	input: output/06_PolyATrimmer/PYMT.BD.fresh.bam
+	output: output/07_SamToFastq/PYMT.BD.fresh.fastq
+	log: output/07_SamToFastq/PYMT.BD.fresh.SamToFastq.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692242)
+179 of 205 steps (87%) done
+rule AlignSTAR:
+	input: output/07_SamToFastq/PYMT.BD.fresh.fastq
+	output: output/08_AlignSTAR/PYMT.BD.fresh.star.Log.out, output/08_AlignSTAR/PYMT.BD.fresh.star.Aligned.out.sam, output/08_AlignSTAR/PYMT.BD.fresh.star.Log.final.out, output/08_AlignSTAR/PYMT.BD.fresh.star.SJ.out.tab, output/08_AlignSTAR/PYMT.BD.fresh.star.Log.progress.out
+	log: output/08_AlignSTAR/PYMT.BD.fresh.STAR.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692281)
+Removing temporary output file output/08_AlignSTAR/PYMT.AC.fresh.star.Aligned.out.sam.
+180 of 205 steps (88%) done
+rule MergeAndTagAlignedBam:
+	input: output/06_PolyATrimmer/PYMT.AC.fresh.bam, output/09_SortSamAligned/PYMT.AC.fresh.bam, /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/mm10_mod.fa, /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/mm10_mod.dict, output/09_SortSamAligned/PYMT.AC.fresh.bam
+	output: output/10_MergeAndTagAlignedBam/PYMT.AC.fresh.bam
+	log: output/10_MergeAndTagAlignedBam/PYMT.AC.fresh.MergeBamAlignment.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692282)
+181 of 205 steps (88%) done
+rule SortSamAligned:
+	input: output/08_AlignSTAR/PYMT.BD.fresh.star.Aligned.out.sam
+	output: output/09_SortSamAligned/PYMT.BD.fresh.bam
+	log: output/09_SortSamAligned/PYMT.BD.fresh.SortSam.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692283)
+182 of 205 steps (89%) done
+rule TagReadWithGeneExon:
+	input: /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/vM14_mod.refFlat, output/10_MergeAndTagAlignedBam/PYMT.AC.fresh.bam
+	output: output/11_TagReadWithGeneExon/PYMT.AC.fresh.bai, output/11_TagReadWithGeneExon/PYMT.AC.fresh.bam
+	log: output/11_TagReadWithGeneExon/PYMT.AC.fresh.TagReadWithGeneExon.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692371)
+Removing temporary output file output/08_AlignSTAR/PYMT.BD.fresh.star.Aligned.out.sam.
+183 of 205 steps (89%) done
+rule MergeAndTagAlignedBam:
+	input: output/06_PolyATrimmer/PYMT.BD.fresh.bam, output/09_SortSamAligned/PYMT.BD.fresh.bam, /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/mm10_mod.fa, /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/mm10_mod.dict, output/09_SortSamAligned/PYMT.BD.fresh.bam
+	output: output/10_MergeAndTagAlignedBam/PYMT.BD.fresh.bam
+	log: output/10_MergeAndTagAlignedBam/PYMT.BD.fresh.MergeBamAlignment.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692372)
+184 of 205 steps (90%) done
+rule EstimateCellNumbers:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.fresh.bai, output/11_TagReadWithGeneExon/PYMT.AC.fresh.bam
+	output: output/13_EstimateCellNumbers/PYMT.AC.fresh.cell_readcounts.txt
+	log: output/13_EstimateCellNumbers/PYMT.AC.fresh.EstimateCellNumbers.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692383)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.fresh.bam
+	output: output/14_DGE/PYMT.AC.fresh.10000_barcodes.dge.summary.txt, output/14_DGE/PYMT.AC.fresh.10000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.AC.fresh.10000.DGE.log
+	wildcards: sample=PYMT.AC.fresh, num_barcodes=10000
+Submitted DRMAA job (jobid 692384)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.fresh.bam
+	output: output/14_DGE/PYMT.AC.fresh.1000_barcodes.dge.summary.txt, output/14_DGE/PYMT.AC.fresh.1000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.AC.fresh.1000.DGE.log
+	wildcards: sample=PYMT.AC.fresh, num_barcodes=1000
+Submitted DRMAA job (jobid 692385)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.fresh.bam
+	output: output/14_DGE/PYMT.AC.fresh.3000_barcodes.dge.summary.txt, output/14_DGE/PYMT.AC.fresh.3000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.AC.fresh.3000.DGE.log
+	wildcards: sample=PYMT.AC.fresh, num_barcodes=3000
+Submitted DRMAA job (jobid 692386)
+rule DetectBeadSynthesisErrors:
+	input: output/11_TagReadWithGeneExon/PYMT.AC.fresh.bai, output/11_TagReadWithGeneExon/PYMT.AC.fresh.bam
+	output: output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.summary.txt, output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.bam, output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.stats.txt
+	log: output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.DetectBeadSynthesisErrors.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692387)
+185 of 205 steps (90%) done
+186 of 205 steps (91%) done
+187 of 205 steps (91%) done
+188 of 205 steps (92%) done
+189 of 205 steps (92%) done
+rule EstimateCellNumbers_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.bam
+	output: output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.cell_readcounts.txt
+	log: output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.EstimateCellNumbers_BeadSynthesisErrorsCorrected.log
+	wildcards: sample=PYMT.AC.fresh
+Submitted DRMAA job (jobid 692445)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.3000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.3000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.3000.DGE.log
+	wildcards: sample=PYMT.AC.fresh, num_barcodes=3000
+Submitted DRMAA job (jobid 692446)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.1000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.1000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.1000.DGE.log
+	wildcards: sample=PYMT.AC.fresh, num_barcodes=1000
+Submitted DRMAA job (jobid 692447)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.10000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.10000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.10000.DGE.log
+	wildcards: sample=PYMT.AC.fresh, num_barcodes=10000
+Submitted DRMAA job (jobid 692448)
+190 of 205 steps (93%) done
+rule TagReadWithGeneExon:
+	input: /share/ScratchGeneral/briglo/makingrefs/2017_postTrinity/vM14_mod.refFlat, output/10_MergeAndTagAlignedBam/PYMT.BD.fresh.bam
+	output: output/11_TagReadWithGeneExon/PYMT.BD.fresh.bai, output/11_TagReadWithGeneExon/PYMT.BD.fresh.bam
+	log: output/11_TagReadWithGeneExon/PYMT.BD.fresh.TagReadWithGeneExon.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692449)
+191 of 205 steps (93%) done
+192 of 205 steps (94%) done
+193 of 205 steps (94%) done
+194 of 205 steps (95%) done
+195 of 205 steps (95%) done
+rule DetectBeadSynthesisErrors:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.fresh.bai, output/11_TagReadWithGeneExon/PYMT.BD.fresh.bam
+	output: output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.summary.txt, output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.bam, output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.stats.txt
+	log: output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.DetectBeadSynthesisErrors.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692524)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.fresh.bam
+	output: output/14_DGE/PYMT.BD.fresh.1000_barcodes.dge.summary.txt, output/14_DGE/PYMT.BD.fresh.1000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.BD.fresh.1000.DGE.log
+	wildcards: sample=PYMT.BD.fresh, num_barcodes=1000
+Submitted DRMAA job (jobid 692525)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.fresh.bam
+	output: output/14_DGE/PYMT.BD.fresh.3000_barcodes.dge.summary.txt, output/14_DGE/PYMT.BD.fresh.3000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.BD.fresh.3000.DGE.log
+	wildcards: sample=PYMT.BD.fresh, num_barcodes=3000
+Submitted DRMAA job (jobid 692526)
+rule DGE:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.fresh.bam
+	output: output/14_DGE/PYMT.BD.fresh.10000_barcodes.dge.summary.txt, output/14_DGE/PYMT.BD.fresh.10000_barcodes.dge.txt
+	log: output/14_DGE/PYMT.BD.fresh.10000.DGE.log
+	wildcards: sample=PYMT.BD.fresh, num_barcodes=10000
+Submitted DRMAA job (jobid 692527)
+rule EstimateCellNumbers:
+	input: output/11_TagReadWithGeneExon/PYMT.BD.fresh.bai, output/11_TagReadWithGeneExon/PYMT.BD.fresh.bam
+	output: output/13_EstimateCellNumbers/PYMT.BD.fresh.cell_readcounts.txt
+	log: output/13_EstimateCellNumbers/PYMT.BD.fresh.EstimateCellNumbers.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 692528)
+196 of 205 steps (96%) done
+197 of 205 steps (96%) done
+198 of 205 steps (97%) done
+199 of 205 steps (97%) done
+200 of 205 steps (98%) done
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.1000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.1000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.1000.DGE.log
+	wildcards: sample=PYMT.BD.fresh, num_barcodes=1000
+Submitted DRMAA job (jobid 697273)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.10000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.10000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.10000.DGE.log
+	wildcards: sample=PYMT.BD.fresh, num_barcodes=10000
+Submitted DRMAA job (jobid 697274)
+rule EstimateCellNumbers_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.bam
+	output: output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.cell_readcounts.txt
+	log: output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.EstimateCellNumbers_BeadSynthesisErrorsCorrected.log
+	wildcards: sample=PYMT.BD.fresh
+Submitted DRMAA job (jobid 697275)
+rule DGE_BeadSynthesisErrorsCorrected:
+	input: output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.bam
+	output: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.3000_barcodes.dge.summary.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.3000_barcodes.dge.txt
+	log: output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.3000.DGE.log
+	wildcards: sample=PYMT.BD.fresh, num_barcodes=3000
+Submitted DRMAA job (jobid 697276)
+201 of 205 steps (98%) done
+202 of 205 steps (99%) done
+203 of 205 steps (99%) done
+204 of 205 steps (100%) done
+localrule all:
+	input: data/genomes/Mt_rRNA_mouse.1.bt2, data/genomes/Mt_rRNA_mouse.2.bt2, data/genomes/Mt_rRNA_mouse.3.bt2, data/genomes/PhiX.1.bt2, data/genomes/PhiX.2.bt2, data/genomes/PhiX.3.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.2.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.3.bt2, data/genomes/rRNA_human.1.bt2, data/genomes/rRNA_human.2.bt2, data/genomes/rRNA_human.3.bt2, data/genomes/Mycoplasma.1.bt2, data/genomes/Mycoplasma.2.bt2, data/genomes/Mycoplasma.3.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.2.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.3.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.2.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.3.bt2, data/genomes/Mt_rRNA_human.1.bt2, data/genomes/Mt_rRNA_human.2.bt2, data/genomes/Mt_rRNA_human.3.bt2, data/genomes/rRNA_mouse.1.bt2, data/genomes/rRNA_mouse.2.bt2, data/genomes/rRNA_mouse.3.bt2, data/genomes/ERCC92.1.bt2, data/genomes/ERCC92.2.bt2, data/genomes/ERCC92.3.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.2.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.3.bt2, data/genomes/Mt_rRNA_mouse.rev.1.bt2, data/genomes/PhiX.rev.1.bt2, data/genomes/Homo_sapiens.GRCh38.dna.primary_assembly.rev.1.bt2, data/genomes/rRNA_human.rev.1.bt2, data/genomes/Mycoplasma.rev.1.bt2, data/genomes/Mus_musculus.GRCm38.dna.primary_assembly.rev.1.bt2, data/genomes/Escherichia_coli_str_k_12_substr_mg1655.GCA_000005845.2.29.dna.genome.rev.1.bt2, data/genomes/Mt_rRNA_human.rev.1.bt2, data/genomes/rRNA_mouse.rev.1.bt2, data/genomes/ERCC92.rev.1.bt2, data/genomes/Saccharomyces_cerevisiae.R64-1-1.dna.toplevel.rev.1.bt2, output/fastqc/separate_lanes/fastqc_collated.csv, output/fastqc/separate_lanes/fastqc_collated.html, output/fastqscreen/separate_lanes/PYMT.BD.fresh_L001_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.24hr_L001_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.24hr_L001_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.fresh_L001_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.fresh_L001_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.24hr_L001_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.24hr_L001_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.fresh_L001_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.fresh_L002_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.24hr_L002_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.24hr_L002_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.fresh_L002_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.fresh_L002_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.24hr_L002_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.24hr_L002_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.fresh_L002_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.fresh_L003_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.24hr_L003_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.24hr_L003_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.fresh_L003_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.fresh_L003_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.24hr_L003_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.24hr_L003_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.fresh_L003_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.fresh_L004_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.24hr_L004_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.24hr_L004_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.fresh_L004_R1_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.fresh_L004_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.24hr_L004_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.BD.24hr_L004_R2_screen.txt, output/fastqscreen/separate_lanes/PYMT.AC.fresh_L004_R2_screen.txt, output/01_FastqToBam_mergeBam/PYMT.BD.fresh.bam, output/01_FastqToBam_mergeBam/PYMT.AC.24hr.bam, output/01_FastqToBam_mergeBam/PYMT.BD.24hr.bam, output/01_FastqToBam_mergeBam/PYMT.AC.fresh.bam, output/02_TagCellBarcodes/PYMT.BD.fresh.unaligned_tagged_cell_summary.txt, output/02_TagCellBarcodes/PYMT.AC.24hr.unaligned_tagged_cell_summary.txt, output/02_TagCellBarcodes/PYMT.BD.24hr.unaligned_tagged_cell_summary.txt, output/02_TagCellBarcodes/PYMT.AC.fresh.unaligned_tagged_cell_summary.txt, output/03_TagMolecularBarcodes/PYMT.BD.fresh.unaligned_tagged_cell_molecular.summary.txt, output/03_TagMolecularBarcodes/PYMT.AC.24hr.unaligned_tagged_cell_molecular.summary.txt, output/03_TagMolecularBarcodes/PYMT.BD.24hr.unaligned_tagged_cell_molecular.summary.txt, output/03_TagMolecularBarcodes/PYMT.AC.fresh.unaligned_tagged_cell_molecular.summary.txt, output/05_TrimStartingSequence/PYMT.BD.fresh.unaligned_tagged_filtered_smart.summary.txt, output/05_TrimStartingSequence/PYMT.AC.24hr.unaligned_tagged_filtered_smart.summary.txt, output/05_TrimStartingSequence/PYMT.BD.24hr.unaligned_tagged_filtered_smart.summary.txt, output/05_TrimStartingSequence/PYMT.AC.fresh.unaligned_tagged_filtered_smart.summary.txt, output/06_PolyATrimmer/PYMT.BD.fresh.bam, output/06_PolyATrimmer/PYMT.AC.24hr.bam, output/06_PolyATrimmer/PYMT.BD.24hr.bam, output/06_PolyATrimmer/PYMT.AC.fresh.bam, output/06_PolyATrimmer/PYMT.BD.fresh.unaligned_tagged_trimmed_polyA.summary.txt, output/06_PolyATrimmer/PYMT.AC.24hr.unaligned_tagged_trimmed_polyA.summary.txt, output/06_PolyATrimmer/PYMT.BD.24hr.unaligned_tagged_trimmed_polyA.summary.txt, output/06_PolyATrimmer/PYMT.AC.fresh.unaligned_tagged_trimmed_polyA.summary.txt, output/07_SamToFastq/PYMT.BD.fresh.fastq, output/07_SamToFastq/PYMT.AC.24hr.fastq, output/07_SamToFastq/PYMT.BD.24hr.fastq, output/07_SamToFastq/PYMT.AC.fresh.fastq, output/08_AlignSTAR/PYMT.BD.fresh.star.Log.final.out, output/08_AlignSTAR/PYMT.AC.24hr.star.Log.final.out, output/08_AlignSTAR/PYMT.BD.24hr.star.Log.final.out, output/08_AlignSTAR/PYMT.AC.fresh.star.Log.final.out, output/08_AlignSTAR/PYMT.BD.fresh.star.Log.out, output/08_AlignSTAR/PYMT.AC.24hr.star.Log.out, output/08_AlignSTAR/PYMT.BD.24hr.star.Log.out, output/08_AlignSTAR/PYMT.AC.fresh.star.Log.out, output/08_AlignSTAR/PYMT.BD.fresh.star.Log.progress.out, output/08_AlignSTAR/PYMT.AC.24hr.star.Log.progress.out, output/08_AlignSTAR/PYMT.BD.24hr.star.Log.progress.out, output/08_AlignSTAR/PYMT.AC.fresh.star.Log.progress.out, output/08_AlignSTAR/PYMT.BD.fresh.star.SJ.out.tab, output/08_AlignSTAR/PYMT.AC.24hr.star.SJ.out.tab, output/08_AlignSTAR/PYMT.BD.24hr.star.SJ.out.tab, output/08_AlignSTAR/PYMT.AC.fresh.star.SJ.out.tab, output/09_SortSamAligned/PYMT.BD.fresh.bam, output/09_SortSamAligned/PYMT.AC.24hr.bam, output/09_SortSamAligned/PYMT.BD.24hr.bam, output/09_SortSamAligned/PYMT.AC.fresh.bam, output/10_MergeAndTagAlignedBam/PYMT.BD.fresh.bam, output/10_MergeAndTagAlignedBam/PYMT.AC.24hr.bam, output/10_MergeAndTagAlignedBam/PYMT.BD.24hr.bam, output/10_MergeAndTagAlignedBam/PYMT.AC.fresh.bam, output/11_TagReadWithGeneExon/PYMT.BD.fresh.bam, output/11_TagReadWithGeneExon/PYMT.AC.24hr.bam, output/11_TagReadWithGeneExon/PYMT.BD.24hr.bam, output/11_TagReadWithGeneExon/PYMT.AC.fresh.bam, output/11_TagReadWithGeneExon/PYMT.BD.fresh.bai, output/11_TagReadWithGeneExon/PYMT.AC.24hr.bai, output/11_TagReadWithGeneExon/PYMT.BD.24hr.bai, output/11_TagReadWithGeneExon/PYMT.AC.fresh.bai, output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.bam, output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.bam, output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.bam, output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.bam, output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.stats.txt, output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.stats.txt, output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.stats.txt, output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.stats.txt, output/12_DetectBeadSynthesisErrors/PYMT.BD.fresh.summary.txt, output/12_DetectBeadSynthesisErrors/PYMT.AC.24hr.summary.txt, output/12_DetectBeadSynthesisErrors/PYMT.BD.24hr.summary.txt, output/12_DetectBeadSynthesisErrors/PYMT.AC.fresh.summary.txt, output/13_EstimateCellNumbers/PYMT.BD.fresh.cell_readcounts.txt, output/13_EstimateCellNumbers/PYMT.AC.24hr.cell_readcounts.txt, output/13_EstimateCellNumbers/PYMT.BD.24hr.cell_readcounts.txt, output/13_EstimateCellNumbers/PYMT.AC.fresh.cell_readcounts.txt, output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.cell_readcounts.txt, output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.cell_readcounts.txt, output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.cell_readcounts.txt, output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.cell_readcounts.txt, output/14_DGE/PYMT.BD.fresh.3000_barcodes.dge.txt, output/14_DGE/PYMT.BD.fresh.10000_barcodes.dge.txt, output/14_DGE/PYMT.BD.fresh.1000_barcodes.dge.txt, output/14_DGE/PYMT.AC.24hr.3000_barcodes.dge.txt, output/14_DGE/PYMT.AC.24hr.10000_barcodes.dge.txt, output/14_DGE/PYMT.AC.24hr.1000_barcodes.dge.txt, output/14_DGE/PYMT.BD.24hr.3000_barcodes.dge.txt, output/14_DGE/PYMT.BD.24hr.10000_barcodes.dge.txt, output/14_DGE/PYMT.BD.24hr.1000_barcodes.dge.txt, output/14_DGE/PYMT.AC.fresh.3000_barcodes.dge.txt, output/14_DGE/PYMT.AC.fresh.10000_barcodes.dge.txt, output/14_DGE/PYMT.AC.fresh.1000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.3000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.10000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.fresh.1000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.3000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.10000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.24hr.1000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.3000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.10000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.BD.24hr.1000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.3000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.10000_barcodes.dge.txt, output/14_DGE_BeadSynthesisErrorsCorrected/PYMT.AC.fresh.1000_barcodes.dge.txt
+205 of 205 steps (100%) done

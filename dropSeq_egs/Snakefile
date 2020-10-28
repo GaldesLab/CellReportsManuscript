@@ -1,0 +1,804 @@
+# ==================================
+# Dan Roden mod by brian
+# CREATED: 07/11/2016
+# MODIFIED_DR: 12/12/2016 - removed temp() file wrapper for the bt2 files from bowtie index as they were being erroneaoulsy removed prior to running fastqscreen
+# MODIFIED_BG: 29/07/2017 - software reconfigured for use by anyone (still need to get the source activate thing sorted).
+# ----------------------------------
+# Snakemake file for Drop-Seq
+#
+# sequence QC
+# + build_bwt2 (for fastq-screen)
+# + fastqc_separate_lanes
+# + collate_fastqc_separate_lanes
+# + fastq_combined_lanes
+# + fastqscreen_separate_lanes
+#
+# DropSeq pre-process rules
+#
+# STAR Alignment rules
+#
+# DropSeq post-alignment rules
+#
+# ======
+# TODO
+# ======
+# + make most output files temp() to reduce amount of data generated
+#   + should these be included in rule all?
+# + add "sample" sub-directory pre-fix to the output directory locations.
+#   AIM: This will allow easy speration of data when multiple samples are included in the same config file.
+#        e.g.: {sample}/{rule_output}/output.files
+#   NOTE: If samples are from different species then will need to consider how to associate genome with sample ID
+# + Add FastQC and fastq-screen rules for the fastq file that is used in STAR alignment step
+#
+# + see specific rule TODOs
+#
+# ------------------------------------------------------------------------------
+# ==========
+# CONFIG
+# ==========
+# Expects config.json of following format:
+# {
+#     "samples": {
+#         "sample": ["sample"]
+#     },
+#     "lanes": {
+#         "sample": ["sample_lane1", "sample_lane2", "sample_laneN"]
+#     },
+#     "units": {
+#         "sample_lane1": ["fastq/sample_lane1_R1.fq.gz", "fastq/sample_lane1_R2.fq.gz"],
+#         "sample_lane2": ["fastq/sample_lane2_R1.fq.gz", "fastq/sample_lane2_R2.fq.gz"],
+#         "sample_laneN": ["fastq/sample_laneN_R1.fq.gz", "fastq/sample_laneN_R2.fq.gz"],
+#     },
+#     "fastq": {
+#         "sample_lane1_R1": ["fastq/sample_lane1_R1.fq.gz"],
+#         "sample_lane1_R2": ["fastq/sample_lane1_R2.fq.gz"],
+#         "sample_lane2_R1": ["fastq/sample_lane2_R1.fq.gz"],
+#         "sample_lane2_R2": ["fastq/sample_lane2_R2.fq.gz"],
+#         "sample_laneN_R1": ["fastq/sample_laneN_R1.fq.gz"],
+#         "sample_laneN_R2": ["fastq/sample_laneN_R2.fq.gz"]
+#      },
+#      "fasta_genomes": {
+#         "Genome_1_name": ["data/genomes/Genome_1.fa"],
+#         "Genome_2_name": ["data/genomes/Genome_2.fa"],
+#         "Genome_N_name": ["data/genomes/Genome_N.fa"]
+#      },
+#      "STAR_genome_dir": "data/genomes/STAR/",
+#      "STAR_exe": "/home/danrod/ClusterSoftware/STAR/2.4.0a/STAR or just STAR to use the conda version"  # NOTE: this param is used primarily for testing as earlier versions of STAR were not available in conda so can be useful to specificy a path to exe
+#      "metadata_fasta": "data/genomes/metadata.fa",
+#      "genome_annotations": "data/genomes/genome.refFlat|GTF",
+#      "genome_dict": "data/genomes/genome.dict",
+#      "fasta_genome_dir": "data/genomes/",
+#      "expected_cells": "1000",
+#      "primer_sequence": "AAGCAGTGGTATCAACGCAGAGTAC",
+#      "fastqc_adapters" : ["data/illumina_adapter_sequences.fastqc_format.txt"],
+#      "fasta_adapters" : ["data/illumina_nextera_adapter_sequences.fa"],
+#      "fastqscreen_conf_file": ["config/fastq_screen.conf"]
+# }
+# ==================================
+configfile: "config/config.json"
+
+UNIT_TO_SAMPLE = {
+    unit: sample for sample, units in config["samples"].items()
+    for unit in units}
+
+UNITS=UNIT_TO_SAMPLE.keys()
+MAPPED_SAMPLES=UNIT_TO_SAMPLE.values()
+LANES=["L001","L002","L003","L004"]
+#STAR_FILES=["Aligned.out.sam","Log.final.out","Log.out","Log.progress.out","SJ.out.tab"]
+STAR_FILES=["Log.final.out","Log.out","Log.progress.out","SJ.out.tab"]
+GENOME_FA_DIR=config["fasta_genome_dir"]
+
+# ==================================
+rule all:
+    input:
+        expand(GENOME_FA_DIR + "{genome}.{i}.bt2", i = range(1, 4), genome=config["fasta_genomes"].keys()),
+        expand(GENOME_FA_DIR + "{genome}.rev.{i}.bt2", i = range(1, 2), genome=config["fasta_genomes"].keys()),
+        expand("output/fastqc/separate_lanes/fastqc_collated.{ftype}", ftype=["csv", "html"]),
+        expand("output/fastqscreen/separate_lanes/{sample}_{lane}_{read}_screen.txt", lane=LANES, read=["R1","R2"], sample=MAPPED_SAMPLES),
+        #expand("01_FastqToBam/{sample}_{lane}.bam", lane=LANES, sample=MAPPED_SAMPLES),
+        expand("output/01_FastqToBam_mergeBam/{sample}.bam", sample=MAPPED_SAMPLES),
+        #expand("output/02_TagCellBarcodes/{sample}.bam", sample=MAPPED_SAMPLES),
+        expand("output/02_TagCellBarcodes/{sample}.unaligned_tagged_cell_summary.txt", sample=MAPPED_SAMPLES),
+        #expand("output/03_TagMolecularBarcodes/{sample}.bam", sample=MAPPED_SAMPLES),
+        expand("output/03_TagMolecularBarcodes/{sample}.unaligned_tagged_cell_molecular.summary.txt", sample=MAPPED_SAMPLES),
+        #expand("output/04_FilterBAM/{sample}.bam", sample=MAPPED_SAMPLES),
+        #expand("output/05_TrimStartingSequence/{sample}.bam", sample=MAPPED_SAMPLES),
+        expand("output/05_TrimStartingSequence/{sample}.unaligned_tagged_filtered_smart.summary.txt", sample=MAPPED_SAMPLES),
+        expand("output/06_PolyATrimmer/{sample}.bam", sample=MAPPED_SAMPLES),
+        expand("output/06_PolyATrimmer/{sample}.unaligned_tagged_trimmed_polyA.summary.txt", sample=MAPPED_SAMPLES),
+        expand("output/07_SamToFastq/{sample}.fastq", sample=MAPPED_SAMPLES),
+        expand("output/08_AlignSTAR/{sample}.star.{star_files}", sample=MAPPED_SAMPLES, star_files=STAR_FILES),
+        expand("output/09_SortSamAligned/{sample}.bam", sample=MAPPED_SAMPLES),
+        expand("output/10_MergeAndTagAlignedBam/{sample}.bam", sample=MAPPED_SAMPLES),
+        expand("output/11_TagReadWithGeneExon/{sample}.bam", sample=MAPPED_SAMPLES),
+        expand("output/11_TagReadWithGeneExon/{sample}.bai", sample=MAPPED_SAMPLES),
+        expand("output/12_DetectBeadSynthesisErrors/{sample}.bam", sample=MAPPED_SAMPLES),
+        expand("output/12_DetectBeadSynthesisErrors/{sample}.stats.txt", sample=MAPPED_SAMPLES),
+        expand("output/12_DetectBeadSynthesisErrors/{sample}.summary.txt", sample=MAPPED_SAMPLES),
+        expand("{out_dir}/{sample}.cell_readcounts.txt", out_dir=["output/13_EstimateCellNumbers", "output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected"], sample=MAPPED_SAMPLES),
+        expand("{out_dir}/{sample}.{num_barcodes}_barcodes.dge.txt", out_dir=["output/14_DGE", "output/14_DGE_BeadSynthesisErrorsCorrected"], sample=MAPPED_SAMPLES, num_barcodes=[config["expected_cells"], "10000", "1000"]),
+
+
+# TODO: add STAR index output        expand(GENOME_FA_DIR + "{genome}.{bwa_files}", bwa_files=BWA_INDEX_FILES, genome=config["bwa_fasta_genome"].keys()),
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Sequence QC
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ==================================
+# rename_fastq
+# ----------------------------------
+# rename fastq files from A to B using a config file
+#
+# NOTE: This now copies the fastq files into a new directory named after the sample
+# fastq/original_name_R1.fastq.gz => fastq_renamed/sampleID/sampleID_R1.fastq.gz
+#
+# This is useful for input to benels align RNA-Seq pipeline,
+# which expects fastq read-pairs in folders named after the sampleID
+# ==================================
+rule rename_fastq:
+    input:
+        lambda wildcards: config["fastq"][wildcards.fastq]
+    output:
+        temp("output/fastq_renamed/{fastq}.fastq.gz")
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=8G",
+        account="GenomeInformatics",
+        jobname="rename_fastq"
+    shell:
+        "cp {input} {output}"
+
+
+# ==================================
+# build_bwt2
+# ----------------------------------
+# Builds bowtie2 indices (for use in fastq_screen)
+# ==================================
+rule build_bwt2:
+    input:
+        lambda wildcards: config["fasta_genomes"][wildcards.genome]
+    output:
+        GENOME_FA_DIR + "{genome}.1.bt2", GENOME_FA_DIR + "{genome}.2.bt2", GENOME_FA_DIR + "{genome}.3.bt2", GENOME_FA_DIR + "{genome}.4.bt2",
+        GENOME_FA_DIR + "{genome}.rev.1.bt2", GENOME_FA_DIR + "{genome}.rev.2.bt2"
+        # NOTE: This temp file removal of the indices doesn't work properly!
+        #       The files get removed before the fastqscreen_raw rule has been run and therefore causes core dump errors
+        #       Interestingly though snakmake doesn't raise an error!
+        #temp(GENOME_FA_DIR + "{genome}.1.bt2"), temp(GENOME_FA_DIR + "{genome}.2.bt2"), temp(GENOME_FA_DIR + "{genome}.3.bt2"), temp(GENOME_FA_DIR + "{genome}.4.bt2"),
+        #temp(GENOME_FA_DIR + "{genome}.rev.1.bt2"), temp(GENOME_FA_DIR + "{genome}.rev.2.bt2")
+    params:
+        cores="4",
+        hvmem="h_vmem=32G",
+        memrequested="mem_requested=32G",
+        account="GenomeInformatics",
+        jobname="build_bwt2"
+    shell:
+        # NOTE: used the same --seed 37 as used in Pachter Kallisto paper Snakemake pipeline
+        'bowtie2-build '
+        '--seed 37 '
+        '{input} {GENOME_FA_DIR}{wildcards.genome}'
+
+
+# ==================================
+# fastqscreen_raw
+# ----------------------------------
+# runs fastq_screen on the raw sequence data
+# ==================================
+rule fastqscreen_raw:
+    input:
+        fastq="output/fastq_renamed/{sample}_{lane}_{read}.fastq.gz",
+        bt2=expand(GENOME_FA_DIR + "{genome}.{i}.bt2", i = range(1, 4), genome=config["fasta_genomes"].keys()),
+        bt2_rev=expand(GENOME_FA_DIR + "{genome}.rev.{i}.bt2", i = range(1, 2), genome=config["fasta_genomes"].keys())
+    output:
+        "output/fastqscreen/separate_lanes/{sample}_{lane}_{read}_screen.txt"
+    params:
+        conf_file=config["fastqscreen_conf_file"],
+        cores="4",
+        hvmem="h_vmem=32G",
+        memrequested="mem_requested=32G",
+        account="GenomeInformatics",
+        jobname="fastqscreen_raw",
+        outdir="output/fastqscreen/separate_lanes/"
+    shell:
+        "fastq_screen --outdir {params.outdir} --conf {params.conf_file} --threads {params.cores} {input.fastq}"
+
+
+# ==================================
+# fastqc_raw
+# ----------------------------------
+# runs fastQC on the raw sequence data
+# ==================================
+rule fastqc_separate_lanes:
+    input:
+        "output/fastq_renamed/{sample}_{lane}_{read}.fastq.gz"
+    output:
+        "output/fastqc/separate_lanes/{sample}_{lane}_{read}_fastqc.html"
+    params:
+        adapters=config["fastqc_adapters"],
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="fastqc_raw",
+        outdir="output/fastqc/separate_lanes/"
+    shell:
+        "fastqc {input} -o {params.outdir} -a {params.adapters} --extract"
+
+
+# ==================================
+# collate_fastqc_raw
+# ----------------------------------
+# runs fastQC report collation on the raw sequence data
+# ==================================
+rule collate_fastqc_separate_lanes:
+    input:
+        expand("output/fastqc/separate_lanes/{sample}_{lane}_{read}_fastqc.html", sample=MAPPED_SAMPLES, lane=["L001","L002","L003","L004"], read=["R1","R2"])
+    output:
+        expand("output/fastqc/separate_lanes/fastqc_collated.{ftype}", ftype=["csv", "html"])
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="collate_fastqc_raw",
+        fastqc_dir="output/fastqc/separate_lanes/"
+    shell:
+        # NOTE: need to do a bit of a work around in node bash environment to get source to work
+        # see: http://redsymbol.net/articles/unofficial-bash-strict-mode/#sourcing-nonconforming-document
+        "set +u;"
+        "source /share/ClusterShare/software/contrib/briglo/miniconda3/bin/activate py27;"
+        "set -u;"
+        "python scripts/FastQC/v0.11.4/create_fastqc_report.py -i {params.fastqc_dir}"
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Sequence data Pre-process
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ==================================
+# fastqToSam
+# ----------------------------------
+# Generate BAM file for each set of paired-end sequence reads from each lane
+#
+# Part of the initial "Prepare BAM from fastq" step
+# Runs picard FastqToSam to generate un-mapped, queryname sorted BAM file
+# ==================================
+rule FastqToBam:
+    input:
+        R1="output/fastq_renamed/{sample}_{lane}_R1.fastq.gz",
+        R2="output/fastq_renamed/{sample}_{lane}_R2.fastq.gz",
+    output:
+        bam=temp("output/01_FastqToBam/{sample}_{lane}.bam")
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="FastqToSam"
+    log:
+        "output/01_FastqToBam/{sample}_{lane}.FastqToBam.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        #"picard FastqToSam FASTQ={input.R1} FASTQ2={input.R2} OUTPUT={output.bam} SAMPLE_NAME={wildcards.sample}_{wildcards.lane} &> {log}"
+        "java -Xmx8g -jar /share/ClusterShare/software/contrib/briglo/picard/build/libs/picard.jar FastqToSam FASTQ={input.R1} FASTQ2={input.R2} OUTPUT={output.bam} SAMPLE_NAME={wildcards.sample}_{wildcards.lane} &> {log}"
+        #"java -Xmx8g -jar /home/danrod/ClusterSoftware/picard/2.0.1/picard.jar FastqToSam FASTQ=$FASTQ1 FASTQ2=$FASTQ2 OUTPUT=$OUTPUTBAM SAMPLE_NAME=$SAMPLENAME"
+
+
+# ==================================
+# mergeBam
+# 01_fastqToBam
+# ----------------------------------
+# Generate merged BAM file from paired-end sequence reads from each lane
+#
+# TODO: make input to this more generic rather than specifically for 4 lane NextSeq input files?
+# ==================================
+rule MergeBam:
+    input:
+        I1="output/01_FastqToBam/{sample}_L001.bam",
+        I2="output/01_FastqToBam/{sample}_L002.bam",
+        I3="output/01_FastqToBam/{sample}_L003.bam",
+        I4="output/01_FastqToBam/{sample}_L004.bam"
+    output:
+        "output/01_FastqToBam_mergeBam/{sample}.bam"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="MergeBam"
+    log:
+        "output/01_FastqToBam_mergeBam/{sample}.MergeSamFiles.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        #"picard MergeSamFiles I={input.I1} I={input.I2}, I={input.I3}, I={input.I4} O={output} &> {log}"
+        "java -Xmx8g -jar /share/ClusterShare/software/contrib/briglo/picard/build/libs/picard.jar MergeSamFiles I={input.I1} I={input.I2} I={input.I3} I={input.I4} O={output} &> {log}"
+        #PICARD="java -Xmx8g -jar /home/danrod/ClusterSoftware/picard/2.0.1/picard.jar MergeSamFiles $INPUTBAMS O=$OUTPUTBAM"
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Drop-Seq barcode and read pre-process
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ==================================
+# TagCellBarcodes
+# 02_TagCellBarcodes
+# ----------------------------------
+# Part of the "Unmapped BAM -> aligned and tagged BAM" Drop-Seq pipeline steps
+# Runs Drop-seq tools [TagBamWithReadSequenceExtended] to tag cell barcodes
+# ==================================
+rule TagCellBarcodes:
+    input:
+        "output/01_FastqToBam_mergeBam/{sample}.bam"
+    output:
+        bam=temp("output/02_TagCellBarcodes/{sample}.bam"),
+        summary="output/02_TagCellBarcodes/{sample}.unaligned_tagged_cell_summary.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="tagCellBarcodes",
+        BASERANGE="1-12",
+        BASEQUALITY="10",
+        BARCODEDREAD="1",
+        DISCARDREAD="false",
+        TAGNAME="XC",
+        NUMBASESBELOWQUALITY="1"
+    log:
+        "output/02_TagCellBarcodes/{sample}.TagBamWithReadSequenceExtended.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/TagBamWithReadSequenceExtended SUMMARY={output.summary} BASE_RANGE={params.BASERANGE} BASE_QUALITY={params.BASEQUALITY} BARCODED_READ={params.BARCODEDREAD} DISCARD_READ={params.DISCARDREAD} TAG_NAME={params.TAGNAME} NUM_BASES_BELOW_QUALITY={params.NUMBASESBELOWQUALITY} INPUT={input} OUTPUT={output.bam} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/TagBamWithReadSequenceExtended SUMMARY=$OUTPUTSUMMARY BASE_RANGE=$BASERANGE BASE_QUALITY=$BASEQUALITY BARCODED_READ=$BARCODEDREAD DISCARD_READ=$DISCARDREAD TAG_NAME=$TAGNAME NUM_BASES_BELOW_QUALITY=$NUMBASESBELOWQUALITY INPUT=$INPUTBAM OUTPUT=$OUTPUTBAM"
+
+# ==================================
+# tagMolecularBarcodes
+# 03_TagMolecularBarcodes
+# ----------------------------------
+# Part of the "Unmapped BAM -> aligned and tagged BAM" Drop-Seq pipeline steps
+# Runs Drop-seq tools [TagBamWithReadSequenceExtended] to tag molecular barcodes
+# ==================================
+rule TagMolecularBarcodes:
+    input:
+        bam="output/02_TagCellBarcodes/{sample}.bam"
+    output:
+        bam=temp("output/03_TagMolecularBarcodes/{sample}.bam"),
+        summary="output/03_TagMolecularBarcodes/{sample}.unaligned_tagged_cell_molecular.summary.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="TagMolecularBarcodes",
+        BASERANGE="13-20",
+        BASEQUALITY="10",
+        BARCODEDREAD="1",
+        DISCARDREAD="true",
+        TAGNAME="XM",
+        NUMBASESBELOWQUALITY="1"
+    log:
+        "output/03_TagMolecularBarcodes/{sample}.TagBamWithReadSequenceExtended.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/TagBamWithReadSequenceExtended SUMMARY={output.summary} BASE_RANGE={params.BASERANGE} BASE_QUALITY={params.BASEQUALITY} BARCODED_READ={params.BARCODEDREAD} DISCARD_READ={params.DISCARDREAD} TAG_NAME={params.TAGNAME} NUM_BASES_BELOW_QUALITY={params.NUMBASESBELOWQUALITY} INPUT={input} OUTPUT={output.bam} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/TagBamWithReadSequenceExtended SUMMARY=$OUTPUTSUMMARY BASE_RANGE=$BASERANGE BASE_QUALITY=$BASEQUALITY BARCODED_READ=$BARCODEDREAD DISCARD_READ=$DISCARDREAD TAG_NAME=$TAGNAME NUM_BASES_BELOW_QUALITY=$NUMBASESBELOWQUALITY INPUT=$INPUTBAM OUTPUT=$OUTPUTBAM"
+
+# ==================================
+# filterBam
+# 04_FilterBam
+# ----------------------------------
+# Part of the "Unmapped BAM -> aligned and tagged BAM" Drop-Seq pipeline steps
+# Runs Drop-seq tools [FilterBam] to filter low quality tagged cell/molecular barcode reads
+# ==================================
+rule FilterBAM:
+    input:
+        "output/03_TagMolecularBarcodes/{sample}.bam"
+    output:
+        temp("output/04_FilterBAM/{sample}.bam")
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="FilterBAM",
+        TAGREJECT="XQ"
+    log:
+        "output/04_FilterBAM/{sample}.FilterBam.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "//share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/FilterBAM TAG_REJECT={params.TAGREJECT} INPUT={input} OUTPUT={output} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/FilterBAM TAG_REJECT=$TAGREJECT INPUT=$INPUTBAM OUTPUT=$OUTPUTBAM"
+
+# ==================================
+# TrimStartingSequence
+# 05_TrimStartingSequence
+# ----------------------------------
+# Part of the "Unmapped BAM -> aligned and tagged BAM" Drop-Seq pipeline steps
+# Runs Drop-seq tools [TrimStartingSequence] to trim any SMART adapter sequences from 5' end of reads
+# ==================================
+rule TrimStartingSequence:
+    input:
+        "output/04_FilterBAM/{sample}.bam"
+    output:
+        bam=temp("output/05_TrimStartingSequence/{sample}.bam"),
+        summary="output/05_TrimStartingSequence/{sample}.unaligned_tagged_filtered_smart.summary.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="TrimStartingSequence",
+        SEQUENCE="AAGCAGTGGTATCAACGCAGAGTGAATGGG",
+        MISMATCHES="0",
+        NUMBASES="5"
+    log:
+        "output/05_TrimStartingSequence/{sample}.TrimStartingSequence.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/TrimStartingSequence OUTPUT_SUMMARY={output.summary} SEQUENCE={params.SEQUENCE} MISMATCHES={params.MISMATCHES} NUM_BASES={params.NUMBASES} INPUT={input} OUTPUT={output.bam} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/TrimStartingSequence OUTPUT_SUMMARY=$OUTPUTSUMMARY SEQUENCE=$SEQUENCE MISMATCHES=$MISMATCHES NUM_BASES=$NUMBASES INPUT=$INPUTBAM OUTPUT=$OUTPUTBAM"
+
+# ==================================
+# PolyATrimmer
+# 06_PolyATrimmer
+# ----------------------------------
+# Part of the "Unmapped BAM -> aligned and tagged BAM" Drop-Seq pipeline steps
+# Runs Drop-seq tools [PolyATrimmer] to trim any trailing polyA sequences from 3' end of reads
+# ==================================
+rule PolyATrimmer:
+    input:
+        "output/05_TrimStartingSequence/{sample}.bam"
+    output:
+        bam="output/06_PolyATrimmer/{sample}.bam",
+        summary="output/06_PolyATrimmer/{sample}.unaligned_tagged_trimmed_polyA.summary.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="PolyATrimmer",
+        MISMATCHES="0",
+        NUMBASES="6"
+    log:
+        "output/06_PolyATrimmer/{sample}.PolyATrimmer.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/PolyATrimmer OUTPUT_SUMMARY={output.summary} MISMATCHES={params.MISMATCHES} NUM_BASES={params.NUMBASES} INPUT={input} OUTPUT={output.bam} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/PolyATrimmer OUTPUT_SUMMARY=$OUTPUTSUMMARY MISMATCHES=$MISMATCHES NUM_BASES=$NUMBASES INPUT=$INPUTBAM OUTPUT=$OUTPUTBAM"
+
+# ==================================
+# SamToFastq
+# 07_SamToFastq
+# ----------------------------------
+# Runs picard SamToFastq
+# Part of Alignment step of Drop-Seq pipaline
+# ==================================
+rule SamToFastq:
+    input:
+        "output/06_PolyATrimmer/{sample}.bam"
+    output:
+        "output/07_SamToFastq/{sample}.fastq"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="SamToFastq"
+    log:
+        "output/07_SamToFastq/{sample}.SamToFastq.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        #"picard SamToFastq INPUT={input} FASTQ={output} &> {log}"
+        "java -Xmx8g -jar /share/ClusterShare/software/contrib/briglo/picard/build/libs/picard.jar SamToFastq INPUT={input} FASTQ={output} &> {log}"
+        #PICARD="java -Xmx8g -jar /home/danrod/ClusterSoftware/picard/2.0.1/picard.jar SamToFastq INPUT=$INPUTBAM FASTQ=$OUTPUTFASTQ"
+
+# ==================================
+# AlignSTAR
+# 08_AlignSTAR
+# ----------------------------------
+# ==================================
+rule AlignSTAR:
+    input:
+        "output/07_SamToFastq/{sample}.fastq"
+    output:
+        sam=temp("output/08_AlignSTAR/{sample}.star.Aligned.out.sam"),
+        log_final="output/08_AlignSTAR/{sample}.star.Log.final.out",
+        log="output/08_AlignSTAR/{sample}.star.Log.out",
+        log_progress="output/08_AlignSTAR/{sample}.star.Log.progress.out",
+        sj="output/08_AlignSTAR/{sample}.star.SJ.out.tab"
+    params:
+        cores="16",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="AlignSTAR",
+        genome_dir=config["STAR_genome_dir"],
+        star_path=config["STAR_exe"]
+    log:
+        "output/08_AlignSTAR/{sample}.STAR.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "{params.star_path} --runThreadN {params.cores} --genomeDir {params.genome_dir} --readFilesIn {input} --outFileNamePrefix output/08_AlignSTAR/{wildcards.sample}.star. &> {log}"
+        #STAR="/home/danrod/ClusterSoftware/STAR/2.4.0a/STAR --runThreadN $CPUS --genomeDir $GENOMEDIR --readFilesIn $INPUTFASTQ --outFileNamePrefix $OUTPUTPREFIX"
+
+# ==================================
+# SortSamAligned
+# 09_SortSamAligned
+# ----------------------------------
+# Part of the align step
+# Runs picard SortSam to generate mapped, queryname sorted BAM file
+# ==================================
+rule SortSamAligned:
+    input:
+        "output/08_AlignSTAR/{sample}.star.Aligned.out.sam"
+    output:
+        "output/09_SortSamAligned/{sample}.bam"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="SortSamAligned",
+        sort_order="queryname"
+    log:
+        "output/09_SortSamAligned/{sample}.SortSam.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        #"picard SortSam INPUT={input} OUTPUT={output} SORT_ORDER={params.sort_order} &> {log}"
+        "java -Dsamjdk.buffer_size=131072 -XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -Xmx8g -jar /share/ClusterShare/software/contrib/briglo/picard/build/libs/picard.jar SortSam INPUT={input} OUTPUT={output} SORT_ORDER={params.sort_order} &> {log}"
+        #PICARD="java -Dsamjdk.buffer_size=131072 -XX:GCTimeLimit=50 -XX:GCHeapFreeLimit=10 -Xmx8g -jar /home/danrod/ClusterSoftware/picard/2.0.1/picard.jar SortSam INPUT=$INPUTSAM OUTPUT=$OUTPUTBAM SORT_ORDER=$SORTORDER"
+
+# ==================================
+# MergeAndTagAlignedBam
+# 10_MergeAndTagAlignedBam
+# ----------------------------------
+# Runs picard MergeBamAlignment
+# Merges the sorted and aligned BAM with the unaligned BAM that has previosuly been tagged with cell and moelcular barcodes
+# Part of "merge and tag aligned reads" step of Drop-Seq pipeline
+# ==================================
+rule MergeAndTagAlignedBam:
+    input:
+        bam="output/09_SortSamAligned/{sample}.bam",
+        genome=config["metadata_fasta"],
+        unmapped_bam="output/06_PolyATrimmer/{sample}.bam",
+        aligned_bam="output/09_SortSamAligned/{sample}.bam",
+        # NOTE: this isn't specifically used in run cmd, but it will fail if this file is not available so check existence before starting
+        genome_dict=config["genome_dict"]
+    output:
+        "output/10_MergeAndTagAlignedBam/{sample}.bam"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="MergeAndTagAlignedBam",
+        INCLUDESECONDARYALIGNMENTS="false",
+        PAIREDRUN="false"
+    log:
+        "output/10_MergeAndTagAlignedBam/{sample}.MergeBamAlignment.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        #"picard MergeBamAlignment REFERENCE_SEQUENCE={input.genome} UNMAPPED_BAM={input.unmapped_bam} ALIGNED_BAM={input.aligned_bam} INCLUDE_SECONDARY_ALIGNMENTS={params.INCLUDESECONDARYALIGNMENTS} PAIRED_RUN={params.PAIREDRUN} OUTPUT={output} &> {log}"
+        "java -Xmx8g -jar /share/ClusterShare/software/contrib/briglo/picard/build/libs/picard.jar MergeBamAlignment REFERENCE_SEQUENCE={input.genome} UNMAPPED_BAM={input.unmapped_bam} ALIGNED_BAM={input.aligned_bam} INCLUDE_SECONDARY_ALIGNMENTS={params.INCLUDESECONDARYALIGNMENTS} PAIRED_RUN={params.PAIREDRUN} OUTPUT={output} &> {log}"
+        #PICARD="java -Xmx8g -jar /home/danrod/ClusterSoftware/picard/2.0.1/picard.jar MergeBamAlignment REFERENCE_SEQUENCE=$REFERENCESEQUENCE UNMAPPED_BAM=$UNMAPPEDBAM ALIGNED_BAM=$ALIGNEDBAM INCLUDE_SECONDARY_ALIGNMENTS=$INCLUDESECONDARYALIGNMENTS PAIRED_RUN=$PAIREDRUN OUTPUT=$OUTPUTBAM"
+
+
+# ==================================
+# TagReadWithGeneExon
+# 11_TagReadWithGeneExon
+# ----------------------------------
+# Part of the "Unmapped BAM -> aligned and tagged BAM" Drop-Seq pipeline steps
+# Runs Drop-seq tools [TagReadWithGeneExon] to tag when a read overlaps with the exon of a gene
+# annotations file [ANNOTATIONS_FILE (e.g., RefFlat or GTF from meta-data)]
+# ==================================
+rule TagReadWithGeneExon:
+    input:
+        bam="output/10_MergeAndTagAlignedBam/{sample}.bam",
+        genome_annotations=config["genome_annotations"]
+    output:
+        bam="output/11_TagReadWithGeneExon/{sample}.bam",
+        bai="output/11_TagReadWithGeneExon/{sample}.bai"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="TagReadWithGeneExon",
+        TAG="GE",
+        CREATEINDEX="true"
+    log:
+        "output/11_TagReadWithGeneExon/{sample}.TagReadWithGeneExon.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/TagReadWithGeneExon ANNOTATIONS_FILE={input.genome_annotations} I={input.bam} O={output.bam} TAG={params.TAG} CREATE_INDEX={params.CREATEINDEX} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/TagReadWithGeneExon ANNOTATIONS_FILE=$ANNOTATIONSFILE I=$INPUTBAM O=$OUTPUTBAM TAG=$TAG CREATE_INDEX=$CREATEINDEX"
+
+
+# ==================================
+# DetectBeadSynthesisErrors
+# 12_DetectBeadSynthesisErrors
+# ----------------------------------
+# [Optional] Final part of the "Unmapped BAM -> aligned and tagged BAM" Drop-Seq pipeline steps
+# Runs Drop-seq tools [DetectBeadSynthesisErrors] to identifies and corrects/drops bead UMI/cell barcodes that have a detected synthesis error
+# outputs: a cleaned BAM file and stats and summary files of the bead synthesis error detection results
+# ==================================
+rule DetectBeadSynthesisErrors:
+    input:
+        bam="output/11_TagReadWithGeneExon/{sample}.bam",
+        bai="output/11_TagReadWithGeneExon/{sample}.bai"
+    output:
+        bam="output/12_DetectBeadSynthesisErrors/{sample}.bam",
+        stats="output/12_DetectBeadSynthesisErrors/{sample}.stats.txt",
+        summary="output/12_DetectBeadSynthesisErrors/{sample}.summary.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="DetectBeadSynthesisErrors",
+        num_barcodes=2*(int(config["expected_cells"])),
+        primer_sequence=config["primer_sequence"]
+    log:
+        "output/12_DetectBeadSynthesisErrors/{sample}.DetectBeadSynthesisErrors.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/DetectBeadSynthesisErrors I={input.bam} O={output.bam} OUTPUT_STATS={output.stats} SUMMARY={output.summary} NUM_BARCODES={params.num_barcodes} PRIMER_SEQUENCE={params.primer_sequence} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/DetectBeadSynthesisErrors I=$INPUTBAM O=$OUTPUTBAM OUTPUT_STATS=$OUTPUTSTATS SUMMARY=$OUTPUTSUMMARY NUM_BARCODES=$NUMBARCODES PRIMER_SEQUENCE=$PRIMERSEQUENCE"
+
+
+# ==================================
+# EstimateCellNumbers
+# 13_EstimateCellNumbers
+# ----------------------------------
+# Generates plots to estimate number of cells present in Drop-seq experiment (using a knee plot)
+# Runs Drop-seq tool [BAMTagHistogram]
+#
+# TODO: add the R code to generate knee plots
+# ==================================
+rule EstimateCellNumbers:
+    input:
+        bam="output/11_TagReadWithGeneExon/{sample}.bam",
+        bai="output/11_TagReadWithGeneExon/{sample}.bai"
+    output:
+        "output/13_EstimateCellNumbers/{sample}.cell_readcounts.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="EstimateCellNumbers",
+        BAMTAG="XC"
+    log:
+        "output/13_EstimateCellNumbers/{sample}.EstimateCellNumbers.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/BAMTagHistogram I={input.bam} O={output} TAG={params.BAMTAG} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/BAMTagHistogram I=$INPUTBAM O=$OUTPUTSTATS TAG=$BAMTAG"
+
+# ==================================
+# EstimateCellNumbers_BeadSynthesisErrorsCorrected
+# 13_EstimateCellNumbers_BeadSynthesisErrorsCorrected
+# ----------------------------------
+# Generates plots to estimate number of cells present in Drop-seq experiment (using a knee plot)
+# Runs Drop-seq tool [BAMTagHistogram]
+#
+# TODO: add the R code to generate knee plots
+# TODO: this is essentially a duplicate of rule "EstimateCellNumbers" with different input files
+#       there must be a way to remove this duplication of code
+# ==================================
+rule EstimateCellNumbers_BeadSynthesisErrorsCorrected:
+    input:
+        bam="output/12_DetectBeadSynthesisErrors/{sample}.bam"
+    output:
+        "output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/{sample}.cell_readcounts.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="EstimateCellNumbers_BeadSynthesisErrorsCorrected",
+        BAMTAG="XC"
+    log:
+        "output/13_EstimateCellNumbers_BeadSynthesisErrorsCorrected/{sample}.EstimateCellNumbers_BeadSynthesisErrorsCorrected.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/BAMTagHistogram I={input.bam} O={output} TAG={params.BAMTAG} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/BAMTagHistogram I=$INPUTBAM O=$OUTPUTSTATS TAG=$BAMTAG"
+
+# ==================================
+# DGE
+# 14_DGE
+# ----------------------------------
+# Runs Digital Gene Expression step of Drop-Seq pipeline
+# Runs Drop-seq tool [DigitalExpression] to generate a gene and transcript matrix for all cells
+#        - Selects the number "NUM_CORE_BARCODES" cell barcodes that have the largest number of transcripts in the library.
+#          NOTE: This can be estimated from the cumulative distribution "knee" plot from the estimateCellNumbers.sh step of the script
+# ==================================
+rule DGE:
+    input:
+        bam="output/11_TagReadWithGeneExon/{sample}.bam"
+    output:
+        dge="output/14_DGE/{sample}.{num_barcodes}_barcodes.dge.txt",
+        summary="output/14_DGE/{sample}.{num_barcodes}_barcodes.dge.summary.txt"
+        # dge="{output_dir}/{sample}.{num_barcodes}_barcodes.dge.txt",
+        # summary="{output_dir}/{sample}.{num_barcodes}_barcodes.dge.summary.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="DGE"
+        #num_barcodes=[config["expected_cells"], "10000"]
+    log:
+        "output/14_DGE/{sample}.{num_barcodes}.DGE.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        #"/home/danrod/ClusterSoftware/Dropseq/1.11/DigitalExpression I={input.bam} O={output.dge} SUMMARY={output.summary} NUM_CORE_BARCODES={params.num_barcodes} &> {log}"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/DigitalExpression I={input.bam} O={output.dge} SUMMARY={output.summary} NUM_CORE_BARCODES={wildcards.num_barcodes} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/DigitalExpression I=$INPUTBAM O=$OUTPUTDGE SUMMARY=$OUTPUTSUMMARY NUM_CORE_BARCODES=$NUMCELLS"
+
+# ==================================
+# DGE
+# 14_DGE_BeadSynthesisErrorsCorrected
+# ----------------------------------
+# Runs Digital Gene Expression step of Drop-Seq pipeline
+# Runs Drop-seq tool [DigitalExpression] to generate a gene and transcript matrix for all cells
+#        - Selects the number "NUM_CORE_BARCODES" cell barcodes that have the largest number of transcripts in the library.
+#          NOTE: This can be estimated from the cumulative distribution "knee" plot from the estimateCellNumbers.sh step of the script
+#
+# TODO: this is essentially a duplicate of rule "DGE" with different input files
+#       there must be a way to remove this duplication of code
+# ==================================
+rule DGE_BeadSynthesisErrorsCorrected:
+    input:
+        bam="output/12_DetectBeadSynthesisErrors/{sample}.bam"
+    output:
+        dge="output/14_DGE_BeadSynthesisErrorsCorrected/{sample}.{num_barcodes}_barcodes.dge.txt",
+        summary="output/14_DGE_BeadSynthesisErrorsCorrected/{sample}.{num_barcodes}_barcodes.dge.summary.txt"
+    params:
+        cores="2",
+        hvmem="h_vmem=16G",
+        memrequested="mem_requested=16G",
+        account="GenomeInformatics",
+        jobname="DGE_BeadSynthesisErrorsCorrected",
+        #num_barcodes=[config["expected_cells"], "10000"]
+    log:
+        "output/14_DGE_BeadSynthesisErrorsCorrected/{sample}.{num_barcodes}.DGE.log"
+    shell:
+        # need to unset the JAVA_HOME as the cluster default environment overrides the conda one...
+        # see: https://github.com/broadinstitute/viral-ngs/pull/493
+        "unset JAVA_HOME;"
+        #"/home/danrod/ClusterSoftware/Dropseq/1.11/DigitalExpression I={input.bam} O={output.dge} SUMMARY={output.summary} NUM_CORE_BARCODES={params.num_barcodes} &> {log}"
+        "/share/ClusterShare/software/contrib/briglo/Drop-seq_tools-1.12/DigitalExpression I={input.bam} O={output.dge} SUMMARY={output.summary} NUM_CORE_BARCODES={wildcards.num_barcodes} &> {log}"
+        #DROP="/home/danrod/ClusterSoftware/Dropseq/1.11/DigitalExpression I=$INPUTBAM O=$OUTPUTDGE SUMMARY=$OUTPUTSUMMARY NUM_CORE_BARCODES=$NUMCELLS"
